@@ -1,0 +1,48 @@
+[
+ {
+  "file": "assets/pagi-di-danau-tondano.jpg",
+  "media": "image",
+  "ref": "openverse:ffd88c56-c2ca-4302-8403-1517b28d89a2",
+  "title": "Pagi di Danau Tondano",
+  "creator": "Mardiansyah Nugraha",
+  "creatorUrl": "https://commons.wikimedia.org/w/index.php?title=User:Mardiansyah_Nugraha&action=edit&redlink=1",
+  "date": null,
+  "license": "CC BY-SA 4.0",
+  "licenseCode": "by-sa",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "creditRequired": true,
+  "page": "https://commons.wikimedia.org/w/index.php?curid=60272334",
+  "via": "Wikimedia Commons",
+  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Pagi_di_Danau_Tondano.jpg/1920px-Pagi_di_Danau_Tondano.jpg",
+  "width": 1920,
+  "height": 1280,
+  "bytes": 291371,
+  "credit": "\"Pagi di Danau Tondano\" by Mardiansyah Nugraha, CC BY-SA 4.0, via Wikimedia Commons",
+  "notes": [
+   "Share-alike: an altered version (recoloured, combined with other pictures) must be shared under the same licence."
+  ],
+  "saved": "2026-10-17T04:58:01.062Z"
+ },
+ {
+  "file": "assets/warung-bu-tika.jpg",
+  "media": "image",
+  "ref": "openverse:ba4c7911-a5b8-41e1-b03a-fc8a52f7177c",
+  "title": "Warung Bu Tika",
+  "creator": "Mx. Granger",
+  "creatorUrl": "https://commons.wikimedia.org/wiki/User:Mx._Granger",
+  "date": null,
+  "license": "CC0",
+  "licenseCode": "cc0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+  "creditRequired": false,
+  "page": "https://commons.wikimedia.org/w/index.php?curid=82900554",
+  "via": "Wikimedia Commons",
+  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Warung_Bu_Tika.jpg/1920px-Warung_Bu_Tika.jpg",
+  "width": 1920,
+  "height": 1440,
+  "bytes": 668703,
+  "credit": "\"Warung Bu Tika\" by Mx. Granger, CC0, via Wikimedia Commons",
+  "notes": [],
+  "saved": "2026-10-17T04:58:18.780Z"
+ }
+]

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wawi Kadio — sistem kasir, dapur, dan reservasi restoran</title>
+<meta name="description" content="Wawi Kadio menyatukan kasir, layar dapur, reservasi kolam &amp; gazebo, dan stok bahan dalam satu sistem. Dipakai di restoran dan kafe di Minahasa. Mulai Rp 150.000/bulan.">
+<meta name="theme-color" content="#dfdedb">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/favicon.svg">
+<link rel="canonical" href="https://saas.yersolid.web.id/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wawi Kadio — sistem kasir, dapur, dan reservasi restoran">
+<meta property="og:description" content="Kasir, layar dapur, reservasi, dan stok bahan dalam satu sistem. Mulai Rp 150.000/bulan.">
+<meta property="og:url" content="https://saas.yersolid.web.id/">
+<meta property="og:locale" content="id_ID">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Lompat ke isi</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">W</span>
+      <span>Yersolid Tech</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigasi utama">
+      <a href="#kasir">Kasir</a>
+      <a href="#stok">Stok</a>
+      <a href="#cara">Cara kerja</a>
+      <a href="#harga">Harga</a>
+      <a href="#tanya">Tanya</a>
+    </nav>
+    <a class="nav-cta" href="#harga">Lihat harga</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-drawer" aria-label="Buka menu">
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="#kasir">Kasir</a>
+    <a href="#stok">Stok</a>
+    <a href="#cara">Cara kerja</a>
+    <a href="#harga">Harga</a>
+    <a href="#tanya">Tanya</a>
+    <a class="nav-cta" href="#harga">Lihat harga</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO: the product performs ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+
+      <div class="hero-copy">
+        <h1 class="display">Kasir yang tahu stok.</h1>
+        <p class="lead muted">Pilih menu di layar kasir — tiketnya langsung masuk layar dapur, dan sisa bahannya ikut berkurang. Ini Wawi Kadio, dipakai di restoran dan kafe di Minahasa.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#harga">Coba 14 hari</a>
+          <a class="btn ghost" href="#kasir">Lihat cara kerjanya</a>
+        </div>
+        <p class="hero-note">Tanpa kartu kredit. Mulai Rp 150.000/bulan.</p>
+        <dl class="hero-facts">
+          <div>
+            <dt>Pesanan tercatat</dt>
+            <dd>853 pesanan di sistem</dd>
+          </div>
+          <div>
+            <dt>Layar dapur</dt>
+            <dd>Ikut dalam hitungan detik</dd>
+          </div>
+          <div>
+            <dt>Harga mulai</dt>
+            <dd>Rp 150.000 per bulan</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- working fragment: real POS with real menu & prices -->
+      <div class="row-media" data-ui>
+        <div class="pos" id="pos">
+          <div class="pos-top">
+            <span class="pos-title">Kasir — Wawi Kadio</span>
+            <span class="pos-tag">Meja 4</span>
+          </div>
+
+          <div class="pos-body">
+            <div class="pos-menu" role="group" aria-label="Menu">
+              <p class="pos-cat">Makanan</p>
+              <button class="pos-item" type="button" aria-pressed="false"
+                      data-name="Nasi Goreng Roa" data-price="25000" data-stock="beras">
+                <span class="pos-name">Nasi Goreng Roa</span>
+                <span class="pos-price">25.000</span>
+              </button>
+              <button class="pos-item" type="button" aria-pressed="false"
+                      data-name="Goroho Stick 25" data-price="25000" data-stock="goroho">
+                <span class="pos-name">Goroho Stick 25</span>
+                <span class="pos-price">25.000</span>
+              </button>
+              <button class="pos-item" type="button" aria-pressed="false"
+                      data-name="Kentang Goreng" data-price="18000" data-stock="kentang">
+                <span class="pos-name">Kentang Goreng</span>
+                <span class="pos-price">18.000</span>
+              </button>
+              <p class="pos-cat">Minuman</p>
+              <button class="pos-item" type="button" aria-pressed="false"
+                      data-name="Kopi Susu Besar" data-price="15000" data-stock="kopi">
+                <span class="pos-name">Kopi Susu Besar</span>
+                <span class="pos-price">15.000</span>
+              </button>
+              <button class="pos-item" type="button" aria-pressed="false"
+                      data-name="Jus Alpukat" data-price="15000" data-stock="alpukat">
+                <span class="pos-name">Jus Alpukat</span>
+                <span class="pos-price">15.000</span>
+              </button>
+            </div>
+
+            <div class="pos-side">
+              <div class="pos-side-head">
+                <span>Pesanan</span>
+                <span id="pos-count">0 item</span>
+              </div>
+              <div class="pos-lines" id="pos-lines" aria-live="polite">
+                <p class="pos-empty" id="pos-empty">Belum ada item. Ketuk menu di sebelah.</p>
+              </div>
+              <div class="pos-total">
+                <span>Total</span>
+                <span class="amt" id="pos-total">Rp 0</span>
+              </div>
+              <button class="pos-pay" id="pos-pay" type="button" disabled>Kirim ke dapur</button>
+              <p class="pos-hint" id="pos-hint">Letakkan pesanan untuk melihat tiket masuk.</p>
+            </div>
+          </div>
+
+          <div class="pos-kds" id="pos-kds" aria-label="Layar dapur">
+            <span class="kds-ticket" data-state="new">#118 Nasi Goreng Roa · 2</span>
+            <span class="kds-ticket">#117 Goroho Stick 25 · 1</span>
+            <span class="kds-ticket">#116 Kopi Susu Besar · 3</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= KASIR → DAPUR ================= -->
+  <section class="band tone" id="kasir">
+    <div class="wrap">
+      <div class="row">
+        <div class="row-copy reveal">
+          <h2 class="head">Kasir dan dapur melihat pesanan yang sama.</h2>
+          <p class="body muted">Kasir mengetuk menu, tiketnya muncul di layar dapur dalam hitungan detik. Tidak ada lagi kertas pesanan yang hilang atau salah baca antara depan dan belakang.</p>
+        </div>
+        <div class="row-media reveal d1" data-ui>
+          <div class="frag">
+            <div class="frag-head">
+              <span>Layar dapur</span>
+              <span class="count">3 aktif</span>
+            </div>
+            <div style="padding:0 8px 10px">
+              <div class="inv-row" style="grid-template-columns:1fr auto auto">
+                <span class="inv-name">#118 Nasi Goreng Roa ×2</span>
+                <span class="inv-qty">2 mnt</span>
+                <span class="inv-flag" style="background:var(--accent);color:var(--accent-ink)">Baru</span>
+              </div>
+              <div class="inv-row" style="grid-template-columns:1fr auto auto">
+                <span class="inv-name">#117 Goroho Stick 25 ×1</span>
+                <span class="inv-qty">6 mnt</span>
+                <span class="inv-flag">Masak</span>
+              </div>
+              <div class="inv-row" style="grid-template-columns:1fr auto auto">
+                <span class="inv-name">#116 Kopi Susu Besar ×3</span>
+                <span class="inv-qty">9 mnt</span>
+                <span class="inv-flag">Siap</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PHOTO BAND: the customer's world ================= -->
+  <section class="photo-band" style="background-image:url('/assets/pagi-di-danau-tondano.jpg')">
+    <div class="wrap">
+      <h2 class="reveal">Dibangun di Minahasa, untuk dapur yang sibuk tiap hari.</h2>
+      <p class="reveal d1">Warung ikan, kafe, dan restoran keluarga di sekitar Tondano dan Tomohon memakai sistem ini untuk menutup buku tanpa lembur.</p>
+      <p class="photo-credit small">Foto: “Pagi di Danau Tondano” oleh Mardiansyah Nugraha, CC BY-SA 4.0, via Wikimedia Commons.</p>
+    </div>
+  </section>
+
+  <!-- ================= STOK ================= -->
+  <section class="band" id="stok">
+    <div class="wrap">
+      <div class="row flip">
+        <div class="row-copy reveal">
+          <h2 class="head">Stok bahan habis bukan kejutan.</h2>
+          <p class="body muted">Setiap porsi mengurangi bahannya. Kalau cakalang tinggal sedikit, sistem memberi tanda sebelum habis di tengah jam makan — bukan setelah pelanggan kecewa.</p>
+        </div>
+        <div class="row-media reveal d1" data-ui>
+          <div class="frag">
+            <div class="frag-head">
+              <span>Stok bahan hari ini</span>
+              <span class="count" id="inv-alert">2 menipis</span>
+            </div>
+            <div class="inv-list" id="inv-list">
+              <div class="inv-row" data-stock="beras">
+                <span class="inv-name">Beras</span>
+                <span class="inv-qty"><span data-qty>42</span> porsi</span>
+                <span class="inv-flag">Aman</span>
+              </div>
+              <div class="inv-row low" data-stock="goroho">
+                <span class="inv-name">Goroho</span>
+                <span class="inv-qty"><span data-qty>6</span> porsi</span>
+                <span class="inv-flag">Menipis</span>
+              </div>
+              <div class="inv-row" data-stock="kentang">
+                <span class="inv-name">Kentang</span>
+                <span class="inv-qty"><span data-qty>28</span> porsi</span>
+                <span class="inv-flag">Aman</span>
+              </div>
+              <div class="inv-row low" data-stock="alpukat">
+                <span class="inv-name">Alpukat</span>
+                <span class="inv-qty"><span data-qty>4</span> porsi</span>
+                <span class="inv-flag">Menipis</span>
+              </div>
+              <div class="inv-row" data-stock="kopi">
+                <span class="inv-name">Kopi</span>
+                <span class="inv-qty"><span data-qty>60</span> porsi</span>
+                <span class="inv-flag">Aman</span>
+              </div>
+            </div>
+          </div>
+          <p class="small muted" style="margin-top:10px">Tambahkan menu di layar kasir di atas — angka stok di sini ikut turun.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PHOTO BAND: the food ================= -->
+  <section class="photo-band" style="background-image:url('/assets/warung-bu-tika.jpg')">
+    <div class="wrap">
+      <h2 class="reveal">Menu yang Anda masak sudah ada namanya di sistem.</h2>
+      <p class="reveal d1">Goroho, nasi goreng roa, kopi susu — dimasukkan sekali, dipakai di kasir, dapur, dan laporan setiap hari.</p>
+      <p class="photo-credit small">Foto: “Warung Bu Tika” oleh Mx. Granger, CC0, via Wikimedia Commons.</p>
+    </div>
+  </section>
+
+  <!-- ================= RESERVASI ================= -->
+  <section class="band tone" id="reservasi">
+    <div class="wrap">
+      <div class="row">
+        <div class="row-copy reveal">
+          <h2 class="head">Kolam dan gazebo, tanpa telepon bolak-balik.</h2>
+          <p class="body muted">Tamu memilih meja sendiri dan melihat mana yang sudah terisi. Petugas cukup menandai kedatangan.</p>
+        </div>
+        <div class="row-media reveal d1" data-ui>
+          <div class="frag">
+            <div class="frag-head">
+              <span>Denah meja — Sabtu</span>
+              <span class="count" id="resv-count">3 terisi</span>
+            </div>
+            <div class="resv">
+              <div class="resv-grid" id="resv-grid">
+                <button class="resv-slot" type="button" data-state="free">Gazebo 1</button>
+                <button class="resv-slot" type="button" data-state="booked">Gazebo 2</button>
+                <button class="resv-slot" type="button" data-state="free">Gazebo 3</button>
+                <button class="resv-slot" type="button" data-state="free">Kolam 1</button>
+                <button class="resv-slot" type="button" data-state="booked">Kolam 2</button>
+                <button class="resv-slot" type="button" data-state="booked">Kolam 3</button>
+                <button class="resv-slot" type="button" data-state="free">Meja 1</button>
+                <button class="resv-slot" type="button" data-state="free">Meja 2</button>
+              </div>
+              <div class="resv-legend">
+                <span><i class="dot free"></i> Kosong</span>
+                <span><i class="dot booked"></i> Terisi</span>
+                <span><i class="dot picked"></i> Pilihan Anda</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LAPORAN ================= -->
+  <section class="band" id="laporan">
+    <div class="wrap">
+      <div class="row flip">
+        <div class="row-copy reveal">
+          <h2 class="head">Tutup buku selesai sebelum pulang.</h2>
+          <p class="body muted">Dua jam mencatat manual tiap malam jadi satu halaman yang sudah terisi: penjualan, menu terlaris, dan transaksi per meja.</p>
+        </div>
+        <div class="row-media reveal d1" data-ui>
+          <div class="frag">
+            <div class="report">
+              <div class="report-head">
+                <span>Menu terlaris</span>
+                <span class="muted" style="font-weight:600">30 Agu</span>
+              </div>
+              <div class="report-figs">
+                <div class="fig">
+                  <div class="fig-k">Total</div>
+                  <div class="fig-v">Rp 4.000</div>
+                </div>
+                <div class="fig">
+                  <div class="fig-k">Transaksi</div>
+                  <div class="fig-v">2</div>
+                </div>
+                <div class="fig">
+                  <div class="fig-k">Rata-rata</div>
+                  <div class="fig-v">Rp 25k</div>
+                </div>
+              </div>
+              <div class="bars">
+                <div class="bar-row">
+                  <span>Goroho Stick</span>
+                  <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
+                  <span class="bar-val">139</span>
+                </div>
+                <div class="bar-row">
+                  <span>Aqua 600 ml</span>
+                  <span class="bar-track"><span class="bar-fill" style="width:96%"></span></span>
+                  <span class="bar-val">133</span>
+                </div>
+                <div class="bar-row">
+                  <span>Pop Mie Soto</span>
+                  <span class="bar-track"><span class="bar-fill" style="width:74%"></span></span>
+                  <span class="bar-val">103</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CARA KERJA ================= -->
+  <section class="band tone" id="cara">
+    <div class="wrap">
+      <h2 class="head reveal" style="max-width:22ch;margin-bottom:clamp(1.5rem,1rem+2vw,2.5rem)">Dari menu baru sampai laporan, satu alur.</h2>
+      <div class="stages reveal d1">
+        <div class="stage">
+          <h3>Susun menu</h3>
+          <p class="body muted">Masukkan menu, harga, dan bahan yang dipotong tiap porsi.</p>
+          <div class="frag">
+            <div class="inv-list" style="padding:6px">
+              <div class="inv-row" style="grid-template-columns:1fr auto">
+                <span class="inv-name">Nasi Goreng Roa</span>
+                <span class="inv-qty">Rp 25.000</span>
+              </div>
+              <div class="inv-row" style="grid-template-columns:1fr auto">
+                <span class="inv-name">Goroho Stick 25</span>
+                <span class="inv-qty">Rp 25.000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stage">
+          <h3>Layani tamu</h3>
+          <p class="body muted">Kasir, dapur, dan reservasi bekerja dari data yang sama.</p>
+          <div class="frag">
+            <div class="pos-kds" style="border-radius:2px">
+              <span class="kds-ticket" data-state="new">#119 Nasi Goreng Roa · 1</span>
+              <span class="kds-ticket">#118 Goroho Stick 25 · 2</span>
+            </div>
+          </div>
+        </div>
+        <div class="stage">
+          <h3>Baca hasilnya</h3>
+          <p class="body muted">Penjualan, menu terlaris, dan sisa stok dalam satu halaman.</p>
+          <div class="frag">
+            <div class="fig" style="padding:10px 12px">
+              <div class="fig-k">Total hari ini</div>
+              <div class="fig-v">Rp 4.000</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HARGA ================= -->
+  <section class="band" id="harga">
+    <div class="wrap">
+      <h2 class="head reveal" style="max-width:20ch">Harga terbuka, tanpa nego.</h2>
+      <p class="lead muted reveal d1" style="margin-top:14px">Bayar bulanan, berhenti kapan saja. Tagihan tahunan hemat 10%.</p>
+
+      <div class="price-wrap reveal d2" style="margin-top:clamp(1.5rem,1rem+2vw,2.5rem)">
+        <table class="price-table">
+          <caption>Harga per outlet, belum termasuk pajak. Pembayaran lewat Midtrans.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Yang Anda dapat</th>
+              <th scope="col">Starter</th>
+              <th scope="col" data-plan="pro">Professional</th>
+              <th scope="col">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Biaya bulanan</th>
+              <td><span class="amount">Rp 150rb</span><span class="per">per bulan</span></td>
+              <td><span class="amount">Rp 300rb</span><span class="per">per bulan</span></td>
+              <td><span class="amount">Rp 500rb</span><span class="per">per bulan</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Jumlah outlet</th>
+              <td>1</td>
+              <td>3</td>
+              <td>Tanpa batas</td>
+            </tr>
+            <tr>
+              <th scope="row">Kasir &amp; layar dapur</th>
+              <td>Ya</td>
+              <td>Ya</td>
+              <td>Ya</td>
+            </tr>
+            <tr>
+              <th scope="row">Reservasi kolam &amp; gazebo</th>
+              <td>Ya</td>
+              <td>Ya</td>
+              <td>Ya</td>
+            </tr>
+            <tr>
+              <th scope="row">Stok bahan</th>
+              <td>Harian</td>
+              <td>Harian + peringatan menipis</td>
+              <td>Harian + peringatan menipis</td>
+            </tr>
+            <tr>
+              <th scope="row">Laporan</th>
+              <td>Harian</td>
+              <td>Mingguan</td>
+              <td>Mingguan + ekspor</td>
+            </tr>
+            <tr>
+              <th scope="row">Akses API</th>
+              <td>Tidak</td>
+              <td>Tidak</td>
+              <td>Ya</td>
+            </tr>
+            <tr>
+              <th scope="row">Dukungan</th>
+              <td>Jam kerja</td>
+              <td>Jam kerja</td>
+              <td>24/7</td>
+            </tr>
+            <tr>
+              <th scope="row"><span class="small muted">Mulai dari</span></th>
+              <td><a class="btn pick" href="mailto:halo@yersolid.web.id?subject=Paket%20Starter">Pilih Starter</a></td>
+              <td><a class="btn pick" href="mailto:halo@yersolid.web.id?subject=Paket%20Professional">Pilih Professional</a></td>
+              <td><a class="btn pick" href="mailto:halo@yersolid.web.id?subject=Paket%20Enterprise">Pilih Enterprise</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="price-note reveal d3">Kalau tagihan terlambat, akun masuk masa tenggang 3 hari lalu turun ke akses laporan saja — data Anda tidak dihapus.</p>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="band tone" id="tanya">
+    <div class="wrap">
+      <h2 class="head reveal" style="max-width:18ch;margin-bottom:clamp(1.5rem,1rem+2vw,2.5rem)">Yang biasa ditanya pemilik warung.</h2>
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary>Apakah harus punya komputer?</summary>
+          <div class="faq-body">
+            <p>Tidak. Kasir dan layar dapur jalan di browser HP atau tablet. Yang dibutuhkan hanya internet dan satu layar untuk dapur.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal d1">
+          <summary>Bisa dipakai kalau internet mati sebentar?</summary>
+          <div class="faq-body">
+            <p>Kasir tetap bisa mencatat pesanan saat koneksi putus, lalu mengirimnya begitu internet kembali. Reservasi online butuh koneksi.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal d2">
+          <summary>Tiket masuk kolam dihitung di kasir yang sama?</summary>
+          <div class="faq-body">
+            <p>Terpisah. Tiket masuk punya kasir sendiri supaya laporan tiket dan laporan makanan tidak tercampur.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal d3">
+          <summary>Data saya kalau berhenti langganan?</summary>
+          <div class="faq-body">
+            <p>Bisa diekspor kapan saja selama langganan aktif. Setelah berhenti, data tetap disimpan dan bisa diminta kembali.</p>
+          </div>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Berapa lama pasangnya?</summary>
+          <div class="faq-body">
+            <p>Menu dan stok awal dimasukkan sekali di awal. Kami bantu sampai kasir pertama berjalan.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= CLOSING ================= -->
+<section class="closing" id="kontak">
+  <div class="wrap">
+    <h2 class="display reveal">Mulai dari kasir sore ini.</h2>
+    <p class="lead reveal d1">Coba 14 hari dengan menu Anda sendiri. Kalau tidak cocok, tidak ada tagihan.</p>
+    <div class="closing-actions reveal d2">
+      <a class="btn" href="mailto:halo@yersolid.web.id?subject=Coba%20Wawi%20Kadio">Minta akses coba</a>
+      <a class="btn ghost" href="#harga">Lihat paket</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <h2 class="foot-name">Yersolid Tech</h2>
+    <p>Sistem manajemen restoran untuk warung, kafe, dan restoran di Indonesia.</p>
+    <div class="foot-links">
+      <a href="#kasir">Kasir</a>
+      <a href="#harga">Harga</a>
+      <a href="#tanya">Tanya</a>
+      <a href="mailto:halo@yersolid.web.id">halo@yersolid.web.id</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
