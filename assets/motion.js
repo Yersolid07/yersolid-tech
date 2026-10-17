@@ -25,65 +25,67 @@
   const heroTl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
   heroTl
-    .from('.hero-copy .display', { y: 34, opacity: 0, duration: 1.05 })
-    .from('.hero-copy .lead', { y: 24, opacity: 0, duration: 0.85 }, '-=0.78')
-    .from('.hero-actions > *', { y: 18, opacity: 0, duration: 0.7, stagger: 0.09 }, '-=0.6')
-    .from('.hero-note', { y: 12, opacity: 0, duration: 0.6 }, '-=0.5')
-    .from('.hero-facts > div', { y: 20, opacity: 0, duration: 0.7, stagger: 0.08 }, '-=0.45')
-    .from('.pos', { y: 40, opacity: 0, scale: 0.97, duration: 1.1 }, '-=1.05')
-    .from('.pos-kds .kds-ticket', { x: -14, opacity: 0, duration: 0.5, stagger: 0.09 }, '-=0.55')
+    .from('.hero-copy .display', { y: 30, duration: 1.0 })
+    .from('.hero-copy .lead', { y: 20, duration: 0.8 }, '-=0.75')
+    .from('.hero-actions > *', { y: 16, duration: 0.65, stagger: 0.09 }, '-=0.55')
+    .from('.hero-note', { y: 10, duration: 0.55 }, '-=0.45')
+    .from('.hero-facts > div', { y: 18, duration: 0.65, stagger: 0.08 }, '-=0.4')
+    .from('.pos', { y: 34, scale: 0.98, duration: 1.05 }, '-=1.0')
+    .from('.pos-kds .kds-ticket', { x: -12, duration: 0.45, stagger: 0.09 }, '-=0.5')
     .from('.kds-ticket[data-state="new"]', { scale: 0.9, duration: 0.45 }, '-=0.4');
 
   // nav turun halus
-  gsap.from('.nav .wrap > *', { y: -14, opacity: 0, duration: 0.7, stagger: 0.05, ease: 'power2.out' });
+  gsap.from('.nav .wrap > *', { y: -10, duration: 0.6, stagger: 0.05, ease: 'power2.out' });
 
   /* ---------------- 2. reveal per bagian (bukan satu fade) ---------------- */
-  // Elemen .reveal dikendalikan GSAP di sini, jadi CSS tidak boleh memaksanya
-  // transparan. Dulu keduanya jalan sendiri-sendiri: CSS menunggu kelas `.in`
-  // yang tidak pernah dipasang, akibatnya 31/31 elemen tetap opacity 0 dan
-  // seluruh isi halaman (laporan, harga) tak pernah muncul.
-  // Aturan: begitu GSAP siap, halaman bertanda .gsap-reveal dan CSS melepas
-  // opacity:0 untuk elemen yang dipegang GSAP.
+  // PELAJARAN MAHAL: isi halaman TIDAK BOLEH bergantung pada JS untuk terlihat.
+  // Dulu .reveal { opacity: 0 } menunggu kelas .in, dan GSAP tidak pernah
+  // memasangnya: 31/31 elemen transparan selamanya. Setelah diperbaiki pun
+  // masih rapuh di HP lambat (domcontentloaded 5,4 detik di CPU 6x lebih
+  // lambat): pengunjung sudah melihat halaman kosong sebelum 'load' jalan.
+  //
+  // Aturan baru: elemen SELALU terlihat. GSAP hanya menganimasikan GERAK
+  // (transform) sebagai hiasan. Kalau GSAP gagal, lambat, atau diblokir,
+  // isi tetap terbaca. Animasi tidak boleh memegang akses ke konten.
   document.documentElement.classList.add('gsap-reveal');
+
   document.querySelectorAll('.band, .photo-band, .closing').forEach((section) => {
+    const targets = [];
     const head = section.querySelector('.head, .display, .foot-name');
     const bodies = section.querySelectorAll('.body, .lead, .faq-list, .stages, .price-wrap, .price-note');
-    const media = section.querySelectorAll('.row-media, .frag, .photo-band h2');
-
-    const targets = [];
+    const media = section.querySelectorAll('.row-media, .frag, .photo-band h2, .reveal');
     if (head) targets.push(head);
     bodies.forEach((b) => targets.push(b));
     media.forEach((m) => targets.push(m));
-    // .reveal yang tidak tercakup selektor di atas tetap harus muncul
-    section.querySelectorAll('.reveal').forEach((el) => {
-      if (!targets.includes(el)) targets.push(el);
-    });
     if (!targets.length) return;
 
+    // Hanya transform. Opacity TIDAK disentuh: elemen sudah terlihat sejak
+    // HTML sampai, jadi tidak ada jendela waktu di mana konten tak terbaca.
     gsap.from(targets, {
-      y: 26,
-      opacity: 0,
-      duration: 0.85,
-      stagger: 0.075,
+      y: 24,
+      duration: 0.8,
+      stagger: 0.07,
       ease: 'power3.out',
+      overwrite: 'auto',
       scrollTrigger: {
         trigger: section,
-        start: 'top 88%',
+        start: 'top 92%',
         once: true,
       },
     });
   });
 
-  // Jaring aman: apa pun yang belum terlihat setelah GSAP jalan, tampilkan.
-  // Lebih baik kehilangan satu animasi daripada isi halaman tak terbaca.
-  const unhide = () => {
-    document.querySelectorAll('.reveal').forEach((el) => {
-      el.classList.add('in');
-      if (Number(getComputedStyle(el).opacity) < 0.95) el.style.opacity = '1';
-    });
+  // Jaring aman: paksa semua gerak kembali ke posisi akhir. Kalau ScrollTrigger
+  // melewatkan section (halaman dimuat saat sudah tergulir, tab disembunyikan,
+  // atau jaringan lambat), isi tetap di tempatnya.
+  const settle = () => {
+    gsap.set('.reveal, .head, .body, .lead, .row-media, .frag', { clearProps: 'transform' });
   };
-  window.addEventListener('load', () => setTimeout(unhide, 1200));
-  setTimeout(unhide, 4000);
+  window.addEventListener('load', () => setTimeout(settle, 900));
+  setTimeout(settle, 2600);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) settle();
+  });
 
   /* ---------------- 3. foto band: parallax lembut ---------------- */
   document.querySelectorAll('.photo-band').forEach((band) => {
@@ -152,9 +154,8 @@
   const priceRows = document.querySelectorAll('.price-table tbody tr');
   if (priceRows.length) {
     gsap.from(priceRows, {
-      y: 16,
-      opacity: 0,
-      duration: 0.6,
+      y: 14,
+      duration: 0.55,
       stagger: 0.045,
       scrollTrigger: { trigger: '.price-table', start: 'top 80%', once: true },
     });

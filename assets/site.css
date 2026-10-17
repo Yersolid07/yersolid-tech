@@ -1204,15 +1204,12 @@ p.body { max-width: 62ch; }
    MOTION — reveals, feedback, signature move (KDS ticket)
    ============================================================ */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.62s var(--ease), transform 0.62s var(--ease);
-  }
-  .reveal.in { opacity: 1; transform: none; }
-  .reveal.d1 { transition-delay: 70ms; }
-  .reveal.d2 { transition-delay: 140ms; }
-  .reveal.d3 { transition-delay: 210ms; }
+  /* Isi halaman TIDAK BOLEH disembunyikan menunggu JS. Perebutan antara
+     CSS (menunggu kelas .in) dan GSAP pernah membuat 31/31 elemen
+     transparan selamanya, dan di HP lambat isi telanjur kosong sebelum
+     skrip jalan. Sekarang .reveal selalu terlihat; GSAP hanya menggeser
+     posisi sebagai hiasan. */
+  .reveal { opacity: 1; transform: none; }
 
   /* signature move: a ticket slides into the KDS when an item is added */
   @keyframes ticketIn {
@@ -1252,4 +1249,12 @@ html.gsap-reveal .reveal {
   opacity: 1;
   transform: none;
   transition: none;
+}
+
+/* Judul bagian yang berdiri di dekat elemen sticky (rail tahap) diberi
+   lapisan sendiri, supaya tidak pernah tertutup saat menggulir. */
+#tanya .head,
+#harga .head {
+  position: relative;
+  z-index: 2;
 }

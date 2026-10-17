@@ -18,16 +18,45 @@
   }
   .hero-copy .lead { font-size: 0.9375rem; line-height: 1.45; margin: 0; }
 
-  /* fakta hero: 2 kolom rapat, bukan tumpukan panjang */
+  /* fakta hero: TIGA kolom sejajar. Dua kolom menyisakan satu sel
+     menggantung di baris kedua, terbaca seperti bug bukan desain. */
   .hero-facts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem 0.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
     margin-top: 0.35rem;
   }
-  .hero-facts > div { padding: 0.45rem 0.55rem; }
-  .hero-facts dt { font-size: 0.8125rem; }
-  .hero-facts dd { font-size: 0.9375rem; line-height: 1.25; }
+  .hero-facts > div {
+    padding: 0.5rem 0.45rem;
+    min-width: 0;
+  }
+  .hero-facts dt {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    margin-bottom: 0.15rem;
+  }
+  .hero-facts dd {
+    font-size: 0.8125rem;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    /* tinggi seragam: dua baris selalu, supaya dasar kolom sejajar */
+    min-height: 2.5em;
+    color: var(--muted);
+  }
+  .hero-facts dd span {
+    display: block;
+    margin-top: 0.05rem;
+  }
+  .hero-facts dd b {
+    display: block;
+    font-family: var(--f-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 0.1rem;
+  }
 
   /* aksi hero: dua tombol berdampingan */
   .hero-actions { gap: 0.5rem; }
