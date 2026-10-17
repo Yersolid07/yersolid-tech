@@ -157,19 +157,27 @@
       render();
     });
 
-    // Kirim ke dapur = signature move: tiket baru masuk KDS
+    // Kirim ke dapur = pesanan masuk ke alur cerita halaman ini
     payEl.addEventListener('click', () => {
       if (order.size === 0) return;
 
-      const summary = [...order.values()]
+      const itemsArr = [...order.entries()].map(([, v]) => ({
+        name: v.name,
+        qty: v.qty,
+        price: v.price,
+      }));
+      const total = itemsArr.reduce((a, it) => a + it.price * it.qty, 0);
+
+      const summary = itemsArr
         .map((v) => `${v.name} · ${v.qty}`)
         .join(' + ')
         .slice(0, 30);
 
+      const no = ticketNo.v;
       const ticket = document.createElement('span');
       ticket.className = 'kds-ticket' + (reduce ? '' : ' fresh');
       ticket.dataset.state = 'new';
-      ticket.textContent = `#${ticketNo.v} ${summary}`;
+      ticket.textContent = `#${no} ${summary}`;
       ticketNo.v += 1;
 
       // tiket lama berhenti jadi "baru"
@@ -178,7 +186,12 @@
       });
       kdsEl.prepend(ticket);
 
-      hintEl.textContent = 'Tiket terkirim ke layar dapur.';
+      // kirim ke alur cerita: dapur, stok, dan laporan bereaksi
+      if (window.YT_STORY) {
+        window.YT_STORY.push({ no, items: itemsArr, total });
+      }
+
+      hintEl.textContent = `Pesanan #${no} terkirim. Gulir ke bawah untuk melihatnya masuk dapur.`;
       order.clear();
       items.forEach((b) => b.setAttribute('aria-pressed', 'false'));
       render();

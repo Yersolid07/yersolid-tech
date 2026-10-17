@@ -3,20 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wawi Kadio — sistem kasir, dapur, dan reservasi restoran</title>
-<meta name="description" content="Wawi Kadio menyatukan kasir, layar dapur, reservasi kolam &amp; gazebo, dan stok bahan dalam satu sistem. Dipakai di restoran dan kafe di Minahasa. Mulai Rp 150.000/bulan.">
+<title>Yersolid Tech — sistem kasir, dapur, dan reservasi untuk restoran</title>
+<meta name="description" content="Satu sistem untuk kasir, layar dapur, reservasi meja, dan stok bahan. Pesanan mengalir otomatis dari kasir ke dapur, stok ikut berkurang, laporan siap saat tutup. Mulai Rp 150.000/bulan.">
 <meta name="theme-color" content="#dfdedb">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/favicon.svg">
 <link rel="canonical" href="https://saas.yersolid.web.id/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Wawi Kadio — sistem kasir, dapur, dan reservasi restoran">
-<meta property="og:description" content="Kasir, layar dapur, reservasi, dan stok bahan dalam satu sistem. Mulai Rp 150.000/bulan.">
+<meta property="og:title" content="Yersolid Tech — sistem kasir, dapur, dan reservasi untuk restoran">
+<meta property="og:description" content="Kasir, layar dapur, reservasi, dan stok bahan dalam satu sistem. Pesanan sampai ke dapur dalam hitungan detik. Mulai Rp 150.000/bulan.">
 <meta property="og:url" content="https://saas.yersolid.web.id/">
 <meta property="og:locale" content="id_ID">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/site.css">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 </head>
@@ -35,6 +36,7 @@
       <a href="#stok">Stok</a>
       <a href="#cara">Cara kerja</a>
       <a href="#harga">Harga</a>
+      <a href="#bukti">Bukti</a>
       <a href="#tanya">Tanya</a>
     </nav>
     <a class="nav-cta" href="#harga">Lihat harga</a>
@@ -47,6 +49,7 @@
     <a href="#stok">Stok</a>
     <a href="#cara">Cara kerja</a>
     <a href="#harga">Harga</a>
+    <a href="#bukti">Bukti</a>
     <a href="#tanya">Tanya</a>
     <a class="nav-cta" href="#harga">Lihat harga</a>
   </div>
@@ -60,7 +63,7 @@
 
       <div class="hero-copy">
         <h1 class="display">Kasir yang tahu stok.</h1>
-        <p class="lead muted">Pilih menu di layar kasir — tiketnya langsung masuk layar dapur, dan sisa bahannya ikut berkurang. Ini Wawi Kadio, dipakai di restoran dan kafe di Minahasa.</p>
+        <p class="lead muted">Ketuk menu di kasir, tiketnya langsung muncul di layar dapur, dan sisa bahannya ikut berkurang. Satu sistem untuk kasir, dapur, reservasi meja, dan stok — tanpa buku catatan dan tanpa rekap ulang.</p>
         <div class="hero-actions">
           <a class="btn" href="#harga">Coba 14 hari</a>
           <a class="btn ghost" href="#kasir">Lihat cara kerjanya</a>
@@ -86,7 +89,7 @@
       <div class="row-media" data-ui>
         <div class="pos" id="pos">
           <div class="pos-top">
-            <span class="pos-title">Kasir — Wawi Kadio</span>
+            <span class="pos-title">Kasir — Resto Anda</span>
             <span class="pos-tag">Meja 4</span>
           </div>
 
@@ -149,39 +152,59 @@
     </div>
   </section>
 
-  <!-- ================= KASIR → DAPUR ================= -->
-  <section class="band tone" id="kasir">
+  <!-- ================= ALUR 1: PESANAN MASUK DAPUR ================= -->
+  <section class="band field-sky" id="dapur">
     <div class="wrap">
-      <div class="row">
-        <div class="row-copy reveal">
-          <h2 class="head">Kasir dan dapur melihat pesanan yang sama.</h2>
-          <p class="body muted">Kasir mengetuk menu, tiketnya muncul di layar dapur dalam hitungan detik. Tidak ada lagi kertas pesanan yang hilang atau salah baca antara depan dan belakang.</p>
-        </div>
-        <div class="row-media reveal d1" data-ui>
-          <div class="frag">
-            <div class="frag-head">
-              <span>Layar dapur</span>
-              <span class="count">3 aktif</span>
-            </div>
-            <div style="padding:0 8px 10px">
-              <div class="inv-row" style="grid-template-columns:1fr auto auto">
-                <span class="inv-name">#118 Nasi Goreng Roa ×2</span>
-                <span class="inv-qty">2 mnt</span>
-                <span class="inv-flag" style="background:var(--accent);color:var(--accent-ink)">Baru</span>
-              </div>
-              <div class="inv-row" style="grid-template-columns:1fr auto auto">
-                <span class="inv-name">#117 Goroho Stick 25 ×1</span>
-                <span class="inv-qty">6 mnt</span>
-                <span class="inv-flag">Masak</span>
-              </div>
-              <div class="inv-row" style="grid-template-columns:1fr auto auto">
-                <span class="inv-name">#116 Kopi Susu Besar ×3</span>
-                <span class="inv-qty">9 mnt</span>
-                <span class="inv-flag">Siap</span>
-              </div>
-            </div>
+      <div class="story-head">
+        <h2 class="head reveal" style="max-width:24ch">Pesanan yang tadi Anda kirim, sampai ke dapur.</h2>
+        <p class="body muted reveal d1" style="max-width:56ch">Tidak ada kertas, tidak ada teriakan dari depan. Tukang masak melihat tiket yang sama, dengan urutan yang jelas.</p>
+      </div>
+
+      <div class="dapur-grid">
+        <div class="dapur-panel reveal" data-ui>
+          <div class="dapur-top">
+            <span class="dapur-title">Layar dapur<span class="dapur-new" id="story-new-badge">baru</span></span>
+            <span class="dapur-stage" id="story-stage">Menunggu pesanan</span>
           </div>
+          <p class="kds-empty" id="story-kds-empty">Belum ada pesanan. Kirim satu dari layar kasir di atas, lalu gulir ke sini.</p>
+          <div class="kds-list" id="story-kds-list" aria-live="polite"></div>
+          <div class="dapur-foot">
+            <span>Total tiket</span>
+            <span class="dapur-total" id="story-kds-total">Rp 0</span>
+          </div>
+          <button class="btn" id="story-advance" type="button" style="width:100%;margin-top:10px">Mulai masak</button>
         </div>
+
+        <ol class="story-steps reveal d1">
+          <li>
+            <span class="step-dot" data-step="masuk"></span>
+            <div>
+              <p class="step-title">Tiket masuk</p>
+              <p class="step-body">Begitu kasir menekan kirim, tiket muncul di sini dalam hitungan detik.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-dot" data-step="masak"></span>
+            <div>
+              <p class="step-title">Sedang dimasak</p>
+              <p class="step-body">Tukang masak menandai tiket, jadi kasir tahu pesanan mana yang sudah jalan.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-dot" data-step="siap"></span>
+            <div>
+              <p class="step-title">Siap diantar</p>
+              <p class="step-body">Tiket berubah hijau. Pramusaji tahu mana yang harus dibawa lebih dulu.</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-dot" data-step="selesai"></span>
+            <div>
+              <p class="step-title">Selesai</p>
+              <p class="step-body">Pesanan masuk laporan harian tanpa dicatat ulang.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
   </section>
@@ -196,7 +219,7 @@
   </section>
 
   <!-- ================= STOK ================= -->
-  <section class="band" id="stok">
+  <section class="band field-sand" id="stok">
     <div class="wrap">
       <div class="row flip">
         <div class="row-copy reveal">
@@ -253,7 +276,7 @@
   </section>
 
   <!-- ================= RESERVASI ================= -->
-  <section class="band tone" id="reservasi">
+  <section class="band field-mint" id="reservasi">
     <div class="wrap">
       <div class="row">
         <div class="row-copy reveal">
@@ -290,7 +313,7 @@
   </section>
 
   <!-- ================= LAPORAN ================= -->
-  <section class="band" id="laporan">
+  <section class="band field-lilac" id="laporan">
     <div class="wrap">
       <div class="row flip">
         <div class="row-copy reveal">
@@ -301,24 +324,24 @@
           <div class="frag">
             <div class="report">
               <div class="report-head">
-                <span>Menu terlaris</span>
+                <span>Rekap hari ini</span>
                 <span class="muted" style="font-weight:600">30 Agu</span>
               </div>
               <div class="report-figs">
                 <div class="fig">
                   <div class="fig-k">Total</div>
-                  <div class="fig-v">Rp 4.000</div>
+                  <div class="fig-v" id="story-day-total">Rp 0</div>
                 </div>
                 <div class="fig">
                   <div class="fig-k">Transaksi</div>
-                  <div class="fig-v">2</div>
+                  <div class="fig-v" id="story-day-count">0</div>
                 </div>
                 <div class="fig">
                   <div class="fig-k">Rata-rata</div>
                   <div class="fig-v">Rp 25k</div>
                 </div>
               </div>
-              <div class="bars">
+              <div class="bars" id="story-day-bars">
                 <div class="bar-row">
                   <span>Goroho Stick</span>
                   <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
@@ -343,7 +366,7 @@
   </section>
 
   <!-- ================= CARA KERJA ================= -->
-  <section class="band tone" id="cara">
+  <section class="band field-sky2" id="cara">
     <div class="wrap">
       <h2 class="head reveal" style="max-width:22ch;margin-bottom:clamp(1.5rem,1rem+2vw,2.5rem)">Dari menu baru sampai laporan, satu alur.</h2>
       <div class="stages reveal d1">
@@ -383,6 +406,42 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BUKTI: satu restoran yang sudah memakai ================= -->
+  <section class="band field-mint" id="bukti">
+    <div class="wrap">
+      <h2 class="head reveal" style="max-width:26ch">Sudah dipakai, salah satunya Wawi Kadio.</h2>
+      <p class="body muted reveal d1" style="max-width:58ch;margin-top:10px">Wawi Kadio restoran di Minahasa. Berikut yang mereka rasakan setelah memindahkan pesanan dari kertas ke sistem.</p>
+      <div class="proof-grid">
+        <blockquote class="proof-quote reveal d1">
+          <p class="proof-tag">Contoh pengguna</p>
+          <p>Sebelumnya pesanan ditulis di kertas, lalu dibaca ulang di dapur. Sekarang kasir mengetuk menu, tiketnya muncul di layar dapur, dan sisa bahan langsung terlihat.</p>
+          <footer>
+            <span class="proof-avatar" aria-hidden="true">WK</span>
+            <span class="proof-person">
+              <span class="proof-who">Wawi Kadio</span>
+              <span class="proof-where">Restoran &amp; kafe, Minahasa, Sulawesi Utara</span>
+            </span>
+          </footer>
+        </blockquote>
+        <dl class="proof-figs reveal d2">
+          <div>
+            <dt>Pesanan tercatat</dt>
+            <dd class="proof-num">853</dd>
+          </div>
+          <div>
+            <dt>Menu di sistem</dt>
+            <dd class="proof-num">15+</dd>
+          </div>
+          <div>
+            <dt>Modul terpakai</dt>
+            <dd>Kasir, dapur, reservasi, stok, laporan</dd>
+          </div>
+          <p class="proof-note">Angka dari data uji internal Wawi Kadio, bukan klaim volume penjualan.</p>
+        </dl>
       </div>
     </div>
   </section>
@@ -467,7 +526,7 @@
   </section>
 
   <!-- ================= FAQ ================= -->
-  <section class="band tone" id="tanya">
+  <section class="band field-sky" id="tanya">
     <div class="wrap">
       <h2 class="head reveal" style="max-width:18ch;margin-bottom:clamp(1.5rem,1rem+2vw,2.5rem)">Yang biasa ditanya pemilik warung.</h2>
       <div class="faq-list">
@@ -513,7 +572,7 @@
     <h2 class="display reveal">Mulai dari kasir sore ini.</h2>
     <p class="lead reveal d1">Coba 14 hari dengan menu Anda sendiri. Kalau tidak cocok, tidak ada tagihan.</p>
     <div class="closing-actions reveal d2">
-      <a class="btn" href="mailto:halo@yersolid.web.id?subject=Coba%20Wawi%20Kadio">Minta akses coba</a>
+      <a class="btn" href="mailto:halo@yersolid.web.id?subject=Coba%20Yersolid%20Tech">Minta akses coba</a>
       <a class="btn ghost" href="#harga">Lihat paket</a>
     </div>
   </div>
@@ -532,6 +591,10 @@
   </div>
 </footer>
 
+<script src="/assets/vendor/gsap.min.js" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/story.js" defer></script>
+<script src="/assets/motion.js" defer></script>
 </body>
 </html>
