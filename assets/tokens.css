@@ -18,6 +18,7 @@
   --bg:        #eaf4fb;  /* ground utama, biru langit sangat muda */
   --surface:   #dcecf7;  /* langkah tonal 1 */
   --surface-2: #cbe4f2;  /* langkah tonal 2 (field kuat) */
+  --surface-hi: #ffffff; /* permukaan terangkat: kartu, tabel, panel */
   --surface-3: #f6fbfe;  /* langkah tonal terang */
 
   /* ---- fields berwarna: satu warna datar per band ---- */

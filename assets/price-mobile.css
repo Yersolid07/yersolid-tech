@@ -1,0 +1,93 @@
+/* ============================================================
+   HARGA DI HP — tiga kartu paket utuh.
+   Masalah terukur: thead disembunyikan (display:none) dan th 0x0,
+   jadi pengguna HP tidak pernah melihat nama paket, harga, atau
+   tombol beli. Hanya nilai "Ya"/"Harian" yang tersisa tanpa konteks.
+   Solusi: kartu khusus HP, data diambil dari tabel yang sama.
+   ============================================================ */
+
+/* layar lebar: kartu disembunyikan, tabel jadi */
+.price-cards { display: none; }
+
+@media (max-width: 720px) {
+  /* tabel tidak lagi dipakai di HP: kartu menggantikannya utuh */
+  .price-table { display: none; }
+  .price-table caption { display: none; }
+
+  .price-cards {
+    display: grid;
+    gap: 14px;
+  }
+
+  .plan-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 16px;
+    background: var(--surface-hi);
+    border-radius: var(--r-ui, 14px);
+  }
+  .plan-card[data-hot="true"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .plan-card h3 {
+    font-family: var(--f-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: inherit;
+  }
+
+  .plan-card .plan-price {
+    font-family: var(--f-display);
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin: 0;
+  }
+  .plan-card .plan-price small {
+    font-family: var(--f-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+
+  .plan-card ul {
+    list-style: none;
+    margin: 2px 0 4px;
+    padding: 0;
+    display: grid;
+    gap: 7px;
+  }
+  .plan-card li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 0.875rem;
+    padding: 7px 8px;
+    border-radius: 8px;
+  }
+  /* nada bergantian sebagai pemisah, bukan garis */
+  .plan-card li:nth-child(odd) { background: rgba(16, 40, 58, 0.045); }
+  .plan-card[data-hot="true"] li:nth-child(odd) { background: rgba(255, 255, 255, 0.14); }
+  .plan-card li span { color: inherit; opacity: 0.8; }
+  .plan-card li b { font-weight: 700; text-align: right; }
+
+  .plan-card .btn {
+    min-height: 46px;
+    width: 100%;
+    margin-top: 4px;
+    background: var(--ink);
+    color: var(--bg);
+  }
+  /* kartu unggulan berlatar aksen: tombol harus kontras terang */
+  .plan-card[data-hot="true"] .btn {
+    background: #ffffff;
+    color: var(--accent);
+    font-weight: 800;
+  }
+}

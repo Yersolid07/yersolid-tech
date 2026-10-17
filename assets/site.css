@@ -1245,3 +1245,11 @@ p.body { max-width: 62ch; }
 
 /* no-js / fallback: nothing may stay hidden */
 .no-js .reveal, html:not(.js) .reveal { opacity: 1; transform: none; }
+
+/* GSAP memegang animasi reveal. CSS tidak boleh memaksa transparan,
+   kalau tidak isi halaman bisa tertinggal tak terlihat selamanya. */
+html.gsap-reveal .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}

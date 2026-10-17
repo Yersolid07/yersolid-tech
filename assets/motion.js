@@ -38,6 +38,13 @@
   gsap.from('.nav .wrap > *', { y: -14, opacity: 0, duration: 0.7, stagger: 0.05, ease: 'power2.out' });
 
   /* ---------------- 2. reveal per bagian (bukan satu fade) ---------------- */
+  // Elemen .reveal dikendalikan GSAP di sini, jadi CSS tidak boleh memaksanya
+  // transparan. Dulu keduanya jalan sendiri-sendiri: CSS menunggu kelas `.in`
+  // yang tidak pernah dipasang, akibatnya 31/31 elemen tetap opacity 0 dan
+  // seluruh isi halaman (laporan, harga) tak pernah muncul.
+  // Aturan: begitu GSAP siap, halaman bertanda .gsap-reveal dan CSS melepas
+  // opacity:0 untuk elemen yang dipegang GSAP.
+  document.documentElement.classList.add('gsap-reveal');
   document.querySelectorAll('.band, .photo-band, .closing').forEach((section) => {
     const head = section.querySelector('.head, .display, .foot-name');
     const bodies = section.querySelectorAll('.body, .lead, .faq-list, .stages, .price-wrap, .price-note');
@@ -47,6 +54,10 @@
     if (head) targets.push(head);
     bodies.forEach((b) => targets.push(b));
     media.forEach((m) => targets.push(m));
+    // .reveal yang tidak tercakup selektor di atas tetap harus muncul
+    section.querySelectorAll('.reveal').forEach((el) => {
+      if (!targets.includes(el)) targets.push(el);
+    });
     if (!targets.length) return;
 
     gsap.from(targets, {
@@ -57,11 +68,22 @@
       ease: 'power3.out',
       scrollTrigger: {
         trigger: section,
-        start: 'top 82%',
+        start: 'top 88%',
         once: true,
       },
     });
   });
+
+  // Jaring aman: apa pun yang belum terlihat setelah GSAP jalan, tampilkan.
+  // Lebih baik kehilangan satu animasi daripada isi halaman tak terbaca.
+  const unhide = () => {
+    document.querySelectorAll('.reveal').forEach((el) => {
+      el.classList.add('in');
+      if (Number(getComputedStyle(el).opacity) < 0.95) el.style.opacity = '1';
+    });
+  };
+  window.addEventListener('load', () => setTimeout(unhide, 1200));
+  setTimeout(unhide, 4000);
 
   /* ---------------- 3. foto band: parallax lembut ---------------- */
   document.querySelectorAll('.photo-band').forEach((band) => {

@@ -1,0 +1,71 @@
+/* ============================================================
+   HP — rapatkan halaman supaya pengunjung cepat sampai isi.
+   Masalah terukur: hero 1341px di layar 780px = 1,7 layar cuma
+   untuk hero, karena panel kasir demo 685px bertumpuk di bawah copy.
+   ============================================================ */
+
+@media (max-width: 720px) {
+  /* hero: jarak lega cuma di atas, bawah dipangkas */
+  .hero { padding-block: 1.25rem 1.5rem; }
+  .hero-grid { gap: 1.1rem; }
+  .hero-copy { gap: 0.65rem; }
+
+  /* judul hero jangan makan 5 baris */
+  .hero-copy .display {
+    font-size: clamp(1.85rem, 8.2vw, 2.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+  .hero-copy .lead { font-size: 0.9375rem; line-height: 1.45; margin: 0; }
+
+  /* fakta hero: 2 kolom rapat, bukan tumpukan panjang */
+  .hero-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 0.75rem;
+    margin-top: 0.35rem;
+  }
+  .hero-facts > div { padding: 0.45rem 0.55rem; }
+  .hero-facts dt { font-size: 0.8125rem; }
+  .hero-facts dd { font-size: 0.9375rem; line-height: 1.25; }
+
+  /* aksi hero: dua tombol berdampingan */
+  .hero-actions { gap: 0.5rem; }
+  .hero-actions .btn { min-height: 46px; font-size: 0.9375rem; }
+
+  /* panel demo kasir di hero: ringkas, bukan replika penuh */
+  .hero .row-media { max-height: none; }
+  .hero .pos { display: grid; gap: 0.5rem; }
+  .hero .pos-menu {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+  .hero .pos-item { padding: 0.5rem; }
+  .hero .pos-icon svg { width: 30px; height: 30px; }
+  .hero .pos-name { font-size: 0.8125rem; }
+  .hero .pos-price { font-size: 0.8125rem; }
+  .hero .pos-stock { font-size: 0.8125rem; }
+  /* panel kds dekoratif di hero tidak perlu di HP */
+  .hero .pos-kds { display: none; }
+
+  /* hero: panel kasir cukup jadi cuplikan, bukan versi penuh.
+     Tombol-tombolnya tetap hidup, keranjang ada di panel alur di bawah. */
+  .hero .pos-body { gap: 0.5rem; }
+  .hero .pos-side {
+    padding: 0.6rem 0.7rem;
+    gap: 0.35rem;
+  }
+  .hero .pos-side .pos-lines,
+  .hero .pos-side .pos-keys { display: none; }
+  .hero .pos-side .pos-total { font-size: 1.05rem; margin: 0; }
+  .hero .pos-side .pos-send { min-height: 44px; }
+
+  /* stok: cukup tiga menu, sisanya di panel alur */
+  .hero .pos-item:nth-child(n + 5) { display: none; }
+}
+
+/* HP sangat kecil */
+@media (max-width: 380px) {
+  .hero .pos-menu { grid-template-columns: 1fr 1fr; }
+  .hero-copy .display { font-size: 1.75rem; }
+}
