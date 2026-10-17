@@ -454,7 +454,7 @@ p.body { max-width: 62ch; }
   font-weight: 600;
   white-space: nowrap;
 }
-.kds-ticket[data-state="new"] { background: var(--accent); color: var(--accent-ink); }
+.frag-ticket[data-state="new"] { background: var(--accent); color: var(--accent-ink); }
 
 /* ============================================================
    SPLIT ROWS — 5/7, alternating fragment size (no zigzag)

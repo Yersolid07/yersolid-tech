@@ -38,6 +38,8 @@
   /* ---- aksen sekunder: hanya penanda, bukan tombol ---- */
   --mark:       #b0298f;  /* magenta: angka, penanda status */
   --mark-soft:  #f7d9ef;
+  --heat:       #c25a1c;  /* oranye bara: progres masak, api */
+  --heat-soft:  #ff8a3d;
   --ok:         #16694a;
   --warn:       #a8451c;
   --warn-soft:  #fbe3d8;

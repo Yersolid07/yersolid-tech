@@ -1,0 +1,103 @@
+/* ============================================================
+   RAIL TAHAP — dari referensi.
+   Menempel di samping saat menggulir, menyala mengikuti posisi.
+   Di HP menjadi bar horizontal di bawah nav.
+   ============================================================ */
+
+.rail-steps {
+  position: sticky;
+  top: 84px;
+  align-self: start;
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  background: var(--surface);
+  border-radius: var(--r);
+}
+
+.rail-tag {
+  background: var(--ink);
+  color: #e8f1f7;
+  border-radius: var(--r);
+  padding: 10px 12px;
+  font-size: var(--t-small);
+  margin-bottom: 8px;
+}
+.rail-tag span { display: block; color: #a9c2d3; font-size: 0.8125rem; font-weight: 600; }
+.rail-tag b {
+  display: block;
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 1px;
+}
+
+.rail-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--r);
+  color: var(--muted);
+  font-size: var(--t-small);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  min-height: 44px;
+}
+.rail-step i {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-style: normal;
+  font-size: 0.8125rem;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.rail-step.is-now {
+  background: var(--surface-3);
+  color: var(--ink);
+}
+.rail-step.is-now i {
+  background: var(--accent);
+  color: #fff;
+  transform: scale(1.12);
+}
+.rail-step.is-done i { background: var(--ok); color: #fff; }
+.rail-step:hover { background: var(--surface-2); color: var(--ink); }
+
+/* jadikan dua kolom: rail + isi alur */
+.flow-2col {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(18px, 2.4vw, 40px);
+  align-items: start;
+}
+.flow-2col > .wrap-inner { min-width: 0; }
+
+@media (max-width: 900px) {
+  .flow-2col { grid-template-columns: 1fr; }
+  .rail-steps {
+    position: sticky;
+    top: 62px;
+    z-index: 40;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    overflow-x: auto;
+    gap: 2px;
+    padding: 6px;
+    border-radius: 0;
+    box-shadow: 0 8px 18px -14px rgba(16, 40, 58, 0.5);
+  }
+  .rail-tag { display: none; }
+  .rail-step { padding: 7px 10px; font-size: 0.8125rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-step, .rail-step i { transition: none; }
+}

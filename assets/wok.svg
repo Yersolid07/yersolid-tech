@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 170" role="img" aria-label="Wajan di atas api">
+  <defs>
+    <radialGradient id="heat" cx="50%" cy="70%" r="55%">
+      <stop offset="0%" stop-color="#ffb060" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#d9713a" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="bowlClip">
+      <path d="M46 84h128c0 30-26 46-64 46S46 114 46 84z"/>
+    </clipPath>
+  </defs>
+
+  <!-- pendar panas di bawah, menyatukan api ke dasar wajan -->
+  <ellipse cx="110" cy="118" rx="82" ry="34" fill="url(#heat)"/>
+
+  <!-- nyala api: tiga lidah, warna berjenjang -->
+  <g class="flame">
+    <path d="M78 132c-7-16 7-21 4-35 12 9 14 19 9 28 5-2 7-7 7-12 9 12 5 26-5 30z" fill="#e8501f"/>
+    <path d="M110 134c-6-14 6-19 3-31 10 7 12 17 7 24 5-2 6-7 6-11 7 10 4 22-4 26z" fill="#ff8a3d"/>
+    <path d="M142 132c-6-14 6-19 3-29 9 7 9 17 6 24z" fill="#e8501f"/>
+  </g>
+
+  <!-- wajan -->
+  <g class="pan">
+    <!-- gagang: menyambung lewat leher, tidak datar -->
+    <path d="M172 96l30-9 4 9-30 11z" fill="#332d29"/>
+    <rect x="196" y="84" width="22" height="11" rx="5" fill="#463a31"/>
+    <ellipse cx="173" cy="97" rx="7" ry="9" fill="#241d19" opacity="0.7"/>
+
+    <path d="M46 84h128c0 30-26 46-64 46S46 114 46 84z" fill="#2a2724"/>
+    <ellipse cx="110" cy="84" rx="64" ry="10" fill="#3d3934"/>
+    <ellipse cx="110" cy="84" rx="55" ry="7.5" fill="#191614"/>
+
+    <!-- isi wajan: bahan yang melompat -->
+    <g class="bits" clip-path="url(#bowlClip)">
+      <circle cx="84" cy="82" r="6.5" fill="#f2b84b"/>
+      <circle cx="110" cy="78" r="5.5" fill="#e8501f"/>
+      <circle cx="132" cy="82" r="6.5" fill="#f2b84b"/>
+      <circle cx="97" cy="85" r="4" fill="#1f8a5b"/>
+      <circle cx="122" cy="85" r="4" fill="#fff6d8"/>
+      <circle cx="106" cy="88" r="3" fill="#e8501f"/>
+    </g>
+    <!-- kilau minyak -->
+    <ellipse cx="92" cy="80" rx="14" ry="3" fill="#ffdcb0" opacity="0.35"/>
+  </g>
+
+  <!-- uap: tiga garis, naik bergantian -->
+  <g class="smoke" fill="none" stroke="#cbe4f2" stroke-width="4.5" stroke-linecap="round">
+    <path d="M86 58c-7-9 7-13 0-24"/>
+    <path d="M110 52c-7-9 7-13 0-26"/>
+    <path d="M134 58c-7-9 7-13 0-24"/>
+  </g>
+</svg>

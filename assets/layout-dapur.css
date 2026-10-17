@@ -1,0 +1,64 @@
+/* ============================================================
+   TATA LETAK DAPUR — board penuh, kunci di tengah komposisi.
+   ============================================================ */
+
+/* board mengambil seluruh lebar: tidak ada kolom kedua tersisa */
+.dapur-grid--board {
+  display: block;
+}
+.dapur-grid--board .kds-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* wajan + board berbagi lebar penuh */
+.kds-board { width: 100%; }
+
+/* kunci: menutupi board sampai ada pesanan */
+.dapur-lock {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 24px;
+  background: var(--surface-2);
+  border-radius: var(--r);
+  transition: opacity 0.45s var(--ease), visibility 0.45s;
+}
+.dapur-lock.off {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.dapur-lock-t {
+  font-family: var(--f-display);
+  font-size: clamp(1.0625rem, 0.9rem + 0.5vw, 1.375rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.dapur-lock-b {
+  font-size: var(--t-small);
+  color: var(--muted);
+  max-width: 38ch;
+  margin-bottom: 8px;
+}
+.dapur-lock-btn {
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--r);
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--t-small);
+  font-weight: 700;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+}
+.dapur-lock-btn:hover { background: var(--accent-deep); }
+.dapur-lock-btn:active { transform: scale(0.97); }
+
+/* cadangan bila board belum punya tinggi (mis. kolom kosong semua) */
+.kds-board:empty + .dapur-lock { position: static; }

@@ -1,0 +1,193 @@
+/* ============================================================
+   KDS BOARD — papan dapur hidup (diambil dari referensi, diperbaiki)
+   Kanban 3 kolom: Masuk -> Dimasak -> Siap.
+   Perbaikan atas referensi:
+   - kolom kosong punya empty-state (bukan terbaca seperti bug)
+   - bar progres diberi label waktu, bukan angka tanpa arti
+   - label kolom punya kontras cukup
+   - tanpa border-left berwarna (dilarang craft-floor); status lewat
+     latar kartu + label + bar
+   ============================================================ */
+
+.kds-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+.kds-col {
+  background: var(--surface-2);
+  border-radius: var(--r);
+  padding: 12px;
+  min-height: 230px;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: background 0.3s var(--ease);
+}
+.kds-col[data-col="cook"] { background: var(--surface); }
+.kds-col[data-col="ready"] { background: var(--field-mint); }
+
+.kds-col-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--t-small);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.kds-col-count {
+  margin-left: auto;
+  background: var(--surface-3);
+  border-radius: 99px;
+  padding: 1px 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* uap tiga batang: tanda kolom sedang memasak */
+.kds-steam { display: inline-flex; gap: 3px; align-items: flex-end; height: 14px; }
+.kds-steam i {
+  width: 4px;
+  height: 11px;
+  border-radius: 4px;
+  background: var(--heat-soft);
+  opacity: 0;
+  transform-origin: bottom;
+}
+.kds-col[data-col="cook"].is-busy .kds-steam i { animation: puff 1.5s ease-in-out infinite; }
+.kds-steam i:nth-child(2) { animation-delay: 0.35s; }
+.kds-steam i:nth-child(3) { animation-delay: 0.7s; }
+@keyframes puff {
+  0% { opacity: 0; transform: translateY(6px) scaleY(0.4); }
+  35% { opacity: 0.95; }
+  100% { opacity: 0; transform: translateY(-7px) scaleY(1.35); }
+}
+
+/* empty-state kolom: jelas "belum ada", bukan render gagal */
+.kds-empty {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: var(--t-small);
+  color: var(--muted);
+  padding: 18px 10px;
+  line-height: 1.4;
+}
+
+/* tiket */
+.kds-ticket {
+  background: var(--surface-3);
+  border-radius: var(--r);
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px -10px rgba(16, 40, 58, 0.55);
+  display: grid;
+  gap: 5px;
+}
+.kds-ticket[data-s="cook"] { background: #fff; }
+.kds-ticket[data-s="ready"] { background: #fff; }
+
+.kds-ticket-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.kds-ticket-no {
+  font-family: var(--f-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.kds-ticket-sum {
+  font-size: var(--t-small);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.kds-ticket-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  font-size: var(--t-small);
+  color: var(--muted);
+}
+.kds-ticket-items li { display: flex; justify-content: space-between; gap: 8px; }
+.kds-ticket-items b { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* bar dengan label waktu: angka selalu punya arti */
+.kds-time {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.kds-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.kds-bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--heat);
+  width: 0;
+  transition: width 0.25s linear, background 0.3s var(--ease);
+}
+.kds-ticket[data-s="ready"] .kds-bar > i { background: var(--ok); }
+
+/* tombol siap: aksi pada tiket, bukan dekorasi */
+.kds-serve {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--r);
+  background: var(--ok);
+  color: #fff;
+  font-size: var(--t-small);
+  font-weight: 700;
+  transition: background 0.2s var(--ease), transform 0.15s var(--ease);
+}
+.kds-serve:hover { background: #115c3f; }
+.kds-serve:active { transform: scale(0.97); }
+
+/* toast: satu pesan, tidak menutupi */
+.kds-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translate(-50%, 140%);
+  z-index: 95;
+  background: var(--ink);
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 99px;
+  font-size: var(--t-small);
+  font-weight: 700;
+  max-width: min(92vw, 420px);
+  text-align: center;
+  transition: transform 0.5s var(--ease-out);
+}
+.kds-toast.on { transform: translate(-50%, 0); }
+
+/* mobile: kolom bertumpuk, tetap terbaca */
+@media (max-width: 720px) {
+  .kds-board { grid-template-columns: 1fr; }
+  .kds-col { min-height: 0; }
+  .kds-empty { padding: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kds-col .kds-steam i { animation: none !important; opacity: 0.8; transform: none !important; }
+  .kds-bar > i { transition: none; }
+}
