@@ -487,6 +487,15 @@
       if (!b) return;
       store.serve(Number(b.dataset.serve));
       toast('Pesanan lunas. Masuk laporan.');
+      // Tandai angka yang baru berubah supaya pengunjung melihat sebab-akibatnya,
+      // bukan sekadar angka yang tiba-tiba beda. (pola dari referensi: .flash)
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.report-num, .rep-total, #rep-stock, .rep-kpi b').forEach((el) => {
+          el.classList.remove('baru');
+          void el.offsetWidth;   // paksa reflow agar animasi bisa diulang
+          el.classList.add('baru');
+        });
+      });
     });
   }
 

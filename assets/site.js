@@ -52,13 +52,19 @@
     const order = new Map();
 
     const stockEl = (key) => document.querySelector(`.inv-row[data-stock="${key}"]`);
-    const readStockRow = (key) => {
+    const readStockRow = (key, btn) => {
       const row = stockEl(key);
-      if (!row) return null;
-      const qtyEl = row.querySelector('[data-qty]');
-      return { row, qtyEl, qty: qtyEl ? parseInt(qtyEl.textContent, 10) : NaN };
+      if (row) {
+        const qtyEl = row.querySelector('[data-qty]');
+        return { row, qtyEl, qty: qtyEl ? parseInt(qtyEl.textContent, 10) : NaN };
+      }
+      // tidak ada panel stok: pakai stok awal dari tombol menu sendiri,
+      // supaya batas stok tetap dihormati dan tidak muncul "undefined".
+      const awal = btn ? parseInt(btn.dataset.qty, 10) : NaN;
+      return { row: null, qtyEl: null, qty: awal };
     };
     const setStockRow = (row, qtyEl, qty) => {
+      if (!qtyEl) return;          // tidak ada panel stok di halaman ini
       qtyEl.textContent = String(Math.max(0, qty));
       row.classList.toggle('low', qty <= 6);
       const flag = row.querySelector('.inv-flag');
@@ -107,10 +113,10 @@
     items.forEach((btn) => {
       btn.addEventListener('click', () => {
         const key = btn.dataset.stock;
-        const name = btn.dataset.name;
+        const name = btn.dataset.name || btn.textContent.trim().split('\n')[0];
         const price = parseInt(btn.dataset.price, 10);
 
-        const st = readStockRow(key);
+        const st = readStockRow(key, btn);
         const inOrder = order.get(key)?.qty ?? 0;
 
         // hormati stok: tidak bisa memesan lebih dari sisa
@@ -144,7 +150,7 @@
       if (!v) return;
 
       v.qty -= 1;
-      const st = readStockRow(key);
+      const st = readStockRow(key, btn);
       if (st && !Number.isNaN(st.qty)) {
         setStockRow(st.row, st.qtyEl, st.qty + 1);
         refreshInvAlert();
@@ -232,7 +238,7 @@
         stock: key,
       });
       btn.setAttribute('aria-pressed', 'true');
-      const st = readStockRow(key);
+      const st = readStockRow(key, btn);
       if (st && !Number.isNaN(st.qty)) {
         setStockRow(st.row, st.qtyEl, st.qty - (key === 'beras' ? 2 : 1));
       }

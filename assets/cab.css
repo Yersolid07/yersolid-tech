@@ -1,0 +1,95 @@
+/* ============================================================
+   KURSOR CAHAYA — garis tipis di sisi kiri alur yang menyala mengikuti
+   seberapa jauh pengunjung sudah masuk ke cerita.
+
+   Diambil dari referensi: .cab adalah bilah vertikal dengan pengisi
+   bergradasi hangat dan titik pijar di ujungnya. Fungsinya menjelaskan
+   "kamu di mana dalam alur ini", bukan hiasan.
+
+   Aturan: hanya di layar lebar (di HP relnya sudah horizontal),
+   mati saat prefers-reduced-motion, dan tidak menghalangi klik.
+   ============================================================ */
+
+.flow-2col {
+  position: relative;
+}
+
+.cab {
+  position: absolute;
+  left: -26px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px;
+  background: rgba(16, 40, 58, 0.1);
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.cab > i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  border-radius: 3px;
+  background: linear-gradient(#e8a33c, var(--heat, #c25a1c));
+  box-shadow: 0 0 12px 2px rgba(194, 90, 28, 0.45);
+  transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* titik pijar di ujung pengisi */
+.cab > i::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: #ffd9a0;
+  box-shadow: 0 0 14px 5px rgba(255, 122, 58, 0.55);
+}
+
+/* Sembunyikan saat rel tahap berubah jadi horizontal (HP/tablet kecil). */
+@media (max-width: 900px) {
+  .cab { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cab > i { transition: none; }
+}
+
+/* ============================================================
+   PENANDA PERUBAHAN — saat pesanan dibayar, angka laporan dan baris stok
+   menyala sebentar. Tujuannya menjelaskan "ini yang baru berubah", bukan
+   dekorasi. Warna memakai langkah tonal sendiri, bukan garis tepi.
+   ============================================================ */
+.report-num.baru,
+.rep-total.baru,
+.rep-kpi b.baru,
+.baru {
+  animation: baru-muncul 1.6s ease-out;
+}
+
+@keyframes baru-muncul {
+  0%   { background: rgba(232, 163, 60, 0.42); }
+  60%  { background: rgba(232, 163, 60, 0.28); }
+  100% { background: transparent; }
+}
+
+#rep-stock .baru,
+.rep-stock .baru {
+  animation: baris-baru 1.6s ease-out;
+}
+
+@keyframes baris-baru {
+  0%   { background: rgba(232, 163, 60, 0.42); }
+  100% { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .baru { animation: none; outline: 2px solid var(--heat, #c25a1c); outline-offset: 2px; }
+}

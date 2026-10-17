@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="/assets/price-mobile.css">
 <link rel="stylesheet" href="/assets/mobile-fix.css">
 <link rel="stylesheet" href="/assets/hero.css">
+<link rel="stylesheet" href="/assets/cab.css">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 </head>
 <body>
@@ -43,7 +44,7 @@
       <span>Yersolid Tech</span>
     </a>
     <nav class="nav-links" aria-label="Navigasi utama">
-      <a href="#kasir">Kasir</a>
+      <a href="#pos">Kasir</a>
       <a href="#stok">Stok</a>
       <a href="#cara">Cara kerja</a>
       <a href="#harga">Harga</a>
@@ -56,7 +57,7 @@
     </button>
   </div>
   <div class="nav-drawer" id="nav-drawer">
-    <a href="#kasir">Kasir</a>
+    <a href="#pos">Kasir</a>
     <a href="#stok">Stok</a>
     <a href="#cara">Cara kerja</a>
     <a href="#harga">Harga</a>
@@ -79,7 +80,6 @@
           <a class="btn" href="#dapur">Mulai dari kasir ↓</a>
         </div>
         <p class="hero-note">Tanpa kartu kredit. Bisa berhenti kapan saja.</p>
-        <p class="hero-scroll">Gulir pelan, semuanya bergerak ↓</p>
         <dl class="hero-facts">
           <div>
             <dt>Pesanan tercatat</dt>
@@ -107,7 +107,7 @@
           <div class="pos-body">
             <div class="pos-menu" role="group" aria-label="Menu" id="pos-menu">
               <p class="pos-cat">Makanan</p>
-              <button class="pos-item" type="button" data-add="nasi" data-stock="12">
+              <button class="pos-item" type="button" data-add="nasi" data-stock="nasi" data-name="Nasi Goreng Roa" data-price="25000" data-qty="12">
                 <span class="pos-icon" aria-hidden="true">
                   <svg viewBox="0 0 40 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 26h24c0 7-5 10-12 10S8 33 8 26z"/><path d="M6 26c2-8 28-8 30 0"/><circle cx="15" cy="22" r="2"/><circle cx="23" cy="20" r="2"/><circle cx="26" cy="25" r="1.6"/></svg>
                 </span>
@@ -117,7 +117,7 @@
                   <span class="pos-stock">12 porsi</span>
                 </span>
               </button>
-              <button class="pos-item" type="button" data-add="goroho" data-stock="8">
+              <button class="pos-item" type="button" data-add="goroho" data-stock="goroho" data-name="goroho stick 20" data-price="20000" data-qty="8">
                 <span class="pos-icon" aria-hidden="true">
                   <svg viewBox="0 0 40 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10c4 6 4 12 0 18"/><path d="M20 8c4 7 4 13 0 20"/><path d="M28 10c4 6 4 12 0 18"/><path d="M6 34h28"/></svg>
                 </span>
@@ -127,7 +127,7 @@
                   <span class="pos-stock">8 porsi</span>
                 </span>
               </button>
-              <button class="pos-item" type="button" data-add="kentang" data-stock="10">
+              <button class="pos-item" type="button" data-add="kentang" data-stock="kentang" data-name="Kentang goreng" data-price="18000" data-qty="10">
                 <span class="pos-icon" aria-hidden="true">
                   <svg viewBox="0 0 40 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c3 5 3 10 0 15"/><path d="M19 4c3 6 3 11 0 17"/><path d="M26 6c3 5 3 10 0 15"/><path d="M11 22h18l-2 14H13z"/></svg>
                 </span>
@@ -138,7 +138,7 @@
                 </span>
               </button>
               <p class="pos-cat">Minuman</p>
-              <button class="pos-item" type="button" data-add="kopi" data-stock="15">
+              <button class="pos-item" type="button" data-add="kopi" data-stock="kopi" data-name="Kopi susu Besar" data-price="15000" data-qty="14">
                 <span class="pos-icon" aria-hidden="true">
                   <svg viewBox="0 0 40 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14h22v10a11 11 0 0 1-22 0z"/><path d="M32 17h3a5 5 0 0 1 0 10h-4"/><path d="M17 6c-2 3 2 4 0 7"/><path d="M25 6c-2 3 2 4 0 7"/></svg>
                 </span>
@@ -148,7 +148,7 @@
                   <span class="pos-stock">15 porsi</span>
                 </span>
               </button>
-              <button class="pos-item" type="button" data-add="jus" data-stock="6">
+              <button class="pos-item" type="button" data-add="jus" data-stock="jus" data-name="Jus Alpukat" data-price="15000" data-qty="6">
                 <span class="pos-icon" aria-hidden="true">
                   <svg viewBox="0 0 40 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10h17l-2 24H15z"/><path d="M13 16h17"/><path d="M24 4l-2 10"/></svg>
                 </span>
@@ -194,12 +194,13 @@
   <div class="flow-2col wrap">
     <nav class="rail-steps" aria-label="Tahap pesanan">
       <div class="rail-tag"><span>Pesanan aktif</span><b id="rail-active">Belum ada</b></div>
-      <a class="rail-step" href="#kasir" data-step="1"><i>1</i>Kasir</a>
+      <a class="rail-step" href="#pos" data-step="1"><i>1</i>Kasir</a>
       <a class="rail-step" href="#dapur" data-step="2"><i>2</i>Dapur</a>
       <a class="rail-step" href="#laporan" data-step="3"><i>3</i>Laporan</a>
       </nav>
 
     <div class="flow-body">
+  <div class="cab" aria-hidden="true"><i id="cab-fill"></i></div>
   <section class="band field-sky" id="dapur">
     <div class="wrap">
       <div class="story-head">
@@ -385,7 +386,7 @@
   <!-- ================= CARA KERJA ================= -->
   <section class="band field-sky2" id="cara">
     <div class="wrap">
-      <h2 class="head reveal" style="max-width:22ch;margin-bottom:clamp(1.5rem,1rem+2vw,2.5rem)">Dari menu baru sampai laporan, satu alur.</h2>
+      <h2 class="head reveal" style="max-width:22ch;margin-bottom:clamp(1.5rem,1rem + 2vw,2.5rem)">Dari menu baru sampai laporan, satu alur.</h2>
       <div class="stages reveal d1">
         <div class="stage">
           <h3>Susun menu</h3>
@@ -469,7 +470,7 @@
       <h2 class="head reveal" style="max-width:20ch">Harga terbuka, tanpa nego.</h2>
       <p class="lead muted reveal d1" style="margin-top:14px">Bayar bulanan, berhenti kapan saja. Tagihan tahunan hemat 10%.</p>
 
-      <div class="price-wrap reveal d2" style="margin-top:clamp(1.5rem,1rem+2vw,2.5rem)">
+      <div class="price-wrap reveal d2" style="margin-top:clamp(1.5rem,1rem + 2vw,2.5rem)">
         <table class="price-table">
           <caption>Harga per outlet, belum termasuk pajak. Pembayaran lewat Midtrans.</caption>
           <thead>
@@ -590,7 +591,7 @@
   <!-- ================= FAQ ================= -->
   <section class="band field-sky" id="tanya">
     <div class="wrap">
-      <h2 class="head reveal" style="max-width:18ch;margin-bottom:clamp(1.5rem,1rem+2vw,2.5rem)">Yang biasa ditanya pemilik warung.</h2>
+      <h2 class="head reveal" style="max-width:18ch;margin-bottom:clamp(1.5rem,1rem + 2vw,2.5rem)">Yang biasa ditanya pemilik warung.</h2>
       <div class="faq-list">
         <details class="faq-item reveal">
           <summary>Apakah harus punya komputer?</summary>
@@ -645,7 +646,7 @@
     <h2 class="foot-name">Yersolid Tech</h2>
     <p>Sistem manajemen restoran untuk warung, kafe, dan restoran di Indonesia.</p>
     <div class="foot-links">
-      <a href="#kasir">Kasir</a>
+      <a href="#pos">Kasir</a>
       <a href="#harga">Harga</a>
       <a href="#tanya">Tanya</a>
       <a href="mailto:halo@yersolid.web.id">halo@yersolid.web.id</a>

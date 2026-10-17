@@ -299,6 +299,29 @@
     });
   }
 
+  /* ---------------- kursor cahaya pada alur ---------------- */
+  // Mengisi garis kiri seiring pengunjung turun melalui cerita. Dibaca dari
+  // posisi .flow-body, bukan dari ScrollTrigger, supaya tetap benar walau
+  // animasi dimatikan atau JS lambat.
+  const cabFill = document.getElementById('cab-fill');
+  const flowBody = document.querySelector('.flow-body');
+  if (cabFill && flowBody) {
+    let raf = 0;
+    const paint = () => {
+      raf = 0;
+      const r = flowBody.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // 0 saat bagian atas alur menyentuh tengah layar, 1 saat bawahnya lewat
+      const lewat = (vh * 0.5 - r.top) / Math.max(1, r.height);
+      const pct = Math.min(1, Math.max(0, lewat)) * 100;
+      cabFill.style.height = pct.toFixed(1) + '%';
+    };
+    const jadwal = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    window.addEventListener('scroll', jadwal, { passive: true });
+    window.addEventListener('resize', jadwal);
+    paint();
+  }
+
   // refresh setelah font & gambar selesai, supaya posisi trigger benar
   window.addEventListener('load', () => ScrollTrigger.refresh());
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());

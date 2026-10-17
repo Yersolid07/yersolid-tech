@@ -544,7 +544,25 @@ p.body { max-width: 62ch; }
   line-height: 1.15;
 }
 .band.tone .resv-slot { background: var(--surface-hi); }
-.resv-slot:hover { background: rgba(36, 86, 214, 0.16); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .resv-slot:hover { background: rgba(36, 86, 214, 0.16); color: var(--ink); }
+}
+/* Di layar sentuh, keadaan "terpilih" harus terlihat. Dulu :hover menang
+   atas [data-state] sehingga pengunjung mengetuk dan tidak melihat apa pun. */
+/* Spesifisitas harus MENGALAHI .band.field-x .resv-slot (0,3,0).
+   Dulu hanya 0,2,0 sehingga latar putih field menang. */
+.band .resv-slot[data-state="picked"],
+.band.field-sky .resv-slot[data-state="picked"],
+.band.field-sand .resv-slot[data-state="picked"],
+.band.field-mint .resv-slot[data-state="picked"],
+.band.field-lilac .resv-slot[data-state="picked"],
+.band.field-sky2 .resv-slot[data-state="picked"],
+.band .resv-slot[data-state="picked"]:hover,
+.band .resv-slot[data-state="picked"]:focus-visible {
+  background: var(--accent) !important;
+  color: var(--accent-ink) !important;
+  font-weight: 700;
+}
 .resv-slot[data-state="booked"],
 .band.tone .resv-slot[data-state="booked"] { background: var(--ink); color: var(--bg); }
 .resv-slot[data-state="picked"],

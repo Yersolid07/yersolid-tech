@@ -63,16 +63,6 @@
 }
 
 /* Petunjuk gulir: kecil, tenang, bergerak pelan. */
-.hero-scroll {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--muted);
-  opacity: 0.75;          /* penunjuk arah, bukan pengumuman */
-  margin: 0 0 clamp(1.8rem, 3vw, 2.6rem);
-  animation: hero-bob 2.4s ease-in-out infinite;
-}
-@keyframes hero-bob {
-  50% { transform: translateY(6px); }
 }
 
 /* Fakta: tiga angka sejajar, dipisah ruang, bukan kotak-kotak. */
@@ -83,7 +73,6 @@
   max-width: 40rem;
   margin: 0 auto;
   text-align: center;
-  border-top: 1px solid rgba(16, 40, 58, 0.1);
   padding-top: clamp(1.1rem, 2vw, 1.6rem);
 }
 
@@ -175,10 +164,7 @@
     margin-top: 0.9rem;
     margin-bottom: 1.1rem;
   }
-  .hero-scroll {
-    display: none;   /* di HP sudah jelas harus digulir */
-  }
-  .hero-facts {
+    .hero-facts {
     gap: 0.5rem;
     padding-top: 0.85rem;
     margin-top: 0.9rem;
@@ -206,8 +192,7 @@
 
 /* ---------- gerak dikurangi ---------- */
 @media (prefers-reduced-motion: reduce) {
-  .hero-scroll { animation: none; }
-}
+  }
 
 /* Warna di hero dibatasi: navy (teks), oranye (aksen), biru (aksi).
    Magenta pada total memunculkan warna keempat yang tak dijelaskan. */
@@ -227,8 +212,13 @@ html {
 
 /* Bagian yang dituju tidak pernah mendarat di bawah nav. */
 section[id],
-main[id] {
+main[id],
+#pos {
   scroll-margin-top: 92px;
+}
+
+h1, h2, h3 {
+  scroll-margin-top: 96px;
 }
 
 /* Gulir di dalam kontainer panjang (tabel, keranjang) juga halus. */
@@ -242,4 +232,24 @@ main[id] {
 /* Bilah gulir ramping, tidak memotong tata letak. */
 @supports (scrollbar-width: thin) {
   html { scrollbar-width: thin; scrollbar-color: rgba(16,40,58,0.28) transparent; }
+}
+
+/* ============================================================
+   Teks tidak boleh pernah tertutup elemen lain saat halaman bergerak.
+   Gate menandai judul 25% tertutup di tablet pada satu posisi scroll.
+   Naikkan teks ke lapisan atas dan beri latar sendiri supaya aman.
+   ============================================================ */
+.scene .head,
+.panel .head,
+h2.head {
+  position: relative;
+  z-index: 2;
+}
+
+/* Kerangka media/ilustrasi tidak boleh naik melewati teks. */
+.panel-media,
+.board-wrap,
+.wok-card {
+  position: relative;
+  z-index: 1;
 }

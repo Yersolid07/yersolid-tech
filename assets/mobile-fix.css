@@ -223,3 +223,16 @@
     min-width: 44px;
   }
 }
+
+/* Nav sticky di tablet membuat judul panjang bisa berakhir di bawahnya
+   pada posisi gulir tertentu. Di tablet ruang vertikal cukup, jadi nav
+   dibuat statis: tidak ada yang bisa menutupi teks. */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .nav {
+    position: static;
+  }
+  .nav-links {
+    display: flex;
+    gap: 14px;
+  }
+}
