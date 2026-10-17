@@ -16,8 +16,9 @@
   margin-top: 22px;
 }
 .kds-col {
-  background: var(--surface-2);
-  border-radius: var(--r);
+  background: #ffffff;
+  border-radius: var(--r-ui);
+  box-shadow: 0 1px 2px rgba(16, 40, 58, 0.06);
   padding: 12px;
   min-height: 230px;
   justify-content: flex-start;
@@ -26,8 +27,8 @@
   gap: 8px;
   transition: background 0.3s var(--ease);
 }
-.kds-col[data-col="cook"] { background: var(--surface); }
-.kds-col[data-col="ready"] { background: var(--field-mint); }
+.kds-col[data-col="cook"] { background: #ffffff; }
+.kds-col[data-col="ready"] { background: #eef8f2; }
 
 .kds-col-head {
   display: flex;
@@ -73,20 +74,20 @@
   text-align: center;
   font-size: var(--t-small);
   color: var(--muted);
-  padding: 18px 10px;
-  line-height: 1.4;
+  padding: 28px 10px;
+  line-height: 1.45;
 }
 
 /* tiket */
 .kds-ticket {
   background: var(--surface-3);
-  border-radius: var(--r);
+  border-radius: var(--r-ui);
   padding: 10px 12px;
   box-shadow: 0 6px 16px -10px rgba(16, 40, 58, 0.55);
   display: grid;
   gap: 5px;
 }
-.kds-ticket[data-s="cook"] { background: #fff; }
+.kds-ticket[data-s="cook"] { background: var(--surface-2); }
 .kds-ticket[data-s="ready"] { background: #fff; }
 
 .kds-ticket-top {
@@ -123,9 +124,10 @@
 .kds-time {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 9px;
   font-size: 0.8125rem;
   font-weight: 600;
+  margin-top: 2px;
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
@@ -151,7 +153,7 @@
   justify-self: start;
   min-height: 44px;
   padding: 0 16px;
-  border-radius: var(--r);
+  border-radius: var(--r-ui);
   background: var(--ok);
   color: #fff;
   font-size: var(--t-small);

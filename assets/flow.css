@@ -1,0 +1,78 @@
+/* ============================================================
+   ALUR 2 KOLOM — rail menempel di samping, isi di kanan.
+   Rail berada DI DALAM grid, bukan mengambang di luar.
+   ============================================================ */
+
+.flow-2col {
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  align-items: start;
+  padding-block: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.flow-body {
+  min-width: 0; /* wajib: tanpa ini isi bisa meluber keluar kolom */
+  display: grid;
+  gap: clamp(14px, 1.6vw, 22px);
+}
+
+/* band di dalam kolom: latar penuh kolom, bukan selebar layar */
+.flow-body > .band {
+  border-radius: var(--r);
+  padding: clamp(18px, 2vw, 30px) clamp(16px, 2vw, 28px);
+}
+.flow-body > .band > .wrap {
+  max-width: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* rail: menempel, tidak menimpa apa pun karena punya kolom sendiri */
+.rail-steps {
+  position: sticky;
+  top: 84px;
+  align-self: start;
+  display: grid;
+  gap: 3px;
+  padding: 8px;
+  background: var(--surface);
+  border-radius: var(--r);
+  box-shadow: 0 10px 30px -22px rgba(16, 40, 58, 0.6);
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+/* layar sedang: kolom rail menyempit */
+@media (max-width: 1080px) and (min-width: 861px) {
+  .flow-2col { grid-template-columns: 168px minmax(0, 1fr); }
+}
+
+/* HP dan tablet kecil: rail jadi bar horizontal, rapat di bawah nav */
+@media (max-width: 860px) {
+  .flow-2col {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding-block: 0;
+  }
+  .rail-steps {
+    position: sticky;
+    top: 60px;
+    z-index: 40;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 2px;
+    padding: 5px;
+    border-radius: 0 0 var(--r) var(--r);
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+    box-shadow: 0 10px 22px -16px rgba(16, 40, 58, 0.7);
+  }
+  .rail-tag { display: none; }
+  .rail-step { padding: 6px 10px; font-size: 0.8125rem; min-height: 44px; }
+  .rail-step i { width: 22px; height: 22px; }
+  /* band tidak perlu latar penuh di HP: hindari garis ganda */
+  .flow-body > .band { border-radius: var(--r); }
+}

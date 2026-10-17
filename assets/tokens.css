@@ -52,6 +52,8 @@
   --t-small:   0.8125rem;
 
   --r: 3px;
+  --r-ui: 14px;   /* radius fragmen produk: referensi meminta besar */
+  --r-pill: 999px;
   --m: clamp(1rem, 0.6rem + 2vw, 2rem);
   --gap-section: clamp(4.5rem, 2rem + 9vw, 8.5rem);
 

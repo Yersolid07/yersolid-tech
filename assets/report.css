@@ -38,7 +38,7 @@
 }
 .rep-fig {
   background: var(--surface-2);
-  border-radius: var(--r);
+  border-radius: var(--r-ui);
   padding: 10px 12px;
 }
 .rep-fig k {

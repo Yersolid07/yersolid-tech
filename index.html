@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="/assets/report.css">
 <link rel="stylesheet" href="/assets/rail.css">
 <link rel="stylesheet" href="/assets/layout-dapur.css">
+<link rel="stylesheet" href="/assets/flow.css">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 </head>
 <body>
@@ -184,13 +185,17 @@
   </section>
 
   <!-- ================= ALUR 1: PESANAN MASUK DAPUR ================= -->
-  <nav class="rail-steps" aria-label="Tahap pesanan">
-    <div class="rail-tag"><span>Pesanan aktif</span><b id="rail-active">Belum ada</b></div>
-    <a class="rail-step" href="#kasir" data-step="1"><i>1</i>Kasir</a>
-    <a class="rail-step" href="#dapur" data-step="2"><i>2</i>Dapur</a>
-    <a class="rail-step" href="#laporan" data-step="3"><i>3</i>Laporan</a>
-  </nav>
 
+
+  <div class="flow-2col wrap">
+    <nav class="rail-steps" aria-label="Tahap pesanan">
+      <div class="rail-tag"><span>Pesanan aktif</span><b id="rail-active">Belum ada</b></div>
+      <a class="rail-step" href="#kasir" data-step="1"><i>1</i>Kasir</a>
+      <a class="rail-step" href="#dapur" data-step="2"><i>2</i>Dapur</a>
+      <a class="rail-step" href="#laporan" data-step="3"><i>3</i>Laporan</a>
+      </nav>
+
+    <div class="flow-body">
   <section class="band field-sky" id="dapur">
     <div class="wrap">
       <div class="story-head">
@@ -277,7 +282,7 @@
   <!-- ================= PHOTO BAND: the food ================= -->
   <section class="photo-band" style="background-image:url('/assets/warung-bu-tika.jpg')">
     <div class="wrap">
-      <h2 class="reveal">Menu yang Anda masak sudah ada namanya di sistem.</h2>
+      <h2 class="reveal">Menu Anda, sudah bernama di sistem.</h2>
       <p class="reveal d1">Goroho, nasi goreng roa, kopi susu — dimasukkan sekali, dipakai di kasir, dapur, dan laporan setiap hari.</p>
       <p class="photo-credit small">Foto: “Warung Bu Tika” oleh Mx. Granger, CC0, via Wikimedia Commons.</p>
     </div>
@@ -288,7 +293,7 @@
     <div class="wrap">
       <div class="row">
         <div class="row-copy reveal">
-          <h2 class="head">Kolam dan gazebo, tanpa telepon bolak-balik.</h2>
+          <h2 class="head">Gazebo dan kolam, tanpa telepon.</h2>
           <p class="body muted">Tamu memilih meja sendiri dan melihat mana yang sudah terisi. Petugas cukup menandai kedatangan.</p>
         </div>
         <div class="row-media reveal d1" data-ui>
@@ -370,6 +375,8 @@
       </div>
     </div>
   </section>
+    </div>
+  </div>
 
   <!-- ================= CARA KERJA ================= -->
   <section class="band field-sky2" id="cara">

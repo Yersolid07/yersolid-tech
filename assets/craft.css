@@ -26,7 +26,7 @@
   z-index: 90;
   pointer-events: none;
   padding: 10px 14px;
-  border-radius: var(--r);
+  border-radius: var(--r-ui);
   background: var(--ink);
   color: #fff;
   font-size: 0.8125rem;
@@ -51,7 +51,7 @@
 .cook-stage {
   position: relative;
   background: var(--ink);
-  border-radius: var(--r);
+  border-radius: var(--r-ui);
   overflow: hidden;
   min-height: 260px;
   display: grid;
