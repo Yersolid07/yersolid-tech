@@ -19,6 +19,7 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/tokens.css">
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/craft.css">
 <script>document.documentElement.classList.replace('no-js','js');</script>
 </head>
 <body>
@@ -175,36 +176,44 @@
           <button class="btn" id="story-advance" type="button" style="width:100%;margin-top:10px">Mulai masak</button>
         </div>
 
-        <ol class="story-steps reveal d1">
-          <li>
-            <span class="step-dot" data-step="masuk"></span>
-            <div>
-              <p class="step-title">Tiket masuk</p>
-              <p class="step-body">Begitu kasir menekan kirim, tiket muncul di sini dalam hitungan detik.</p>
+        <div class="cook-col">
+          <div class="cook-stage" data-ui>
+            <canvas class="steam-canvas" id="steam" aria-hidden="true"></canvas>
+            <span class="cook-count" id="cook-count">0:00</span>
+            <div class="cook-pan">
+              <span class="cook-ring"></span>
+              <span class="cook-ring-progress" id="cook-ring"></span>
+              <span class="cook-core" id="cook-core"></span>
             </div>
-          </li>
-          <li>
-            <span class="step-dot" data-step="masak"></span>
-            <div>
-              <p class="step-title">Sedang dimasak</p>
-              <p class="step-body">Tukang masak menandai tiket, jadi kasir tahu pesanan mana yang sudah jalan.</p>
+            <p class="cook-label" id="cook-label">Menunggu pesanan</p>
+          </div>
+
+          <div class="rail" id="rail">
+            <div class="rail-step" data-stage="masuk">
+              <span class="rail-track"><span class="rail-fill"></span></span>
+              <span class="rail-node">1</span>
+              <p class="rail-title">Tiket masuk</p>
+              <p class="rail-body">Kasir menekan kirim, tiket muncul di dapur.</p>
             </div>
-          </li>
-          <li>
-            <span class="step-dot" data-step="siap"></span>
-            <div>
-              <p class="step-title">Siap diantar</p>
-              <p class="step-body">Tiket berubah hijau. Pramusaji tahu mana yang harus dibawa lebih dulu.</p>
+            <div class="rail-step" data-stage="masak">
+              <span class="rail-track"><span class="rail-fill"></span></span>
+              <span class="rail-node">2</span>
+              <p class="rail-title">Dimasak</p>
+              <p class="rail-body">Tukang masak menandai tiket yang sedang jalan.</p>
             </div>
-          </li>
-          <li>
-            <span class="step-dot" data-step="selesai"></span>
-            <div>
-              <p class="step-title">Selesai</p>
-              <p class="step-body">Pesanan masuk laporan harian tanpa dicatat ulang.</p>
+            <div class="rail-step" data-stage="siap">
+              <span class="rail-track"><span class="rail-fill"></span></span>
+              <span class="rail-node">3</span>
+              <p class="rail-title">Siap</p>
+              <p class="rail-body">Pramusaji tahu mana yang dibawa lebih dulu.</p>
             </div>
-          </li>
-        </ol>
+            <div class="rail-step" data-stage="selesai">
+              <span class="rail-node">4</span>
+              <p class="rail-title">Lunas</p>
+              <p class="rail-body">Masuk laporan tanpa dicatat ulang.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -327,18 +336,18 @@
                 <span>Rekap hari ini</span>
                 <span class="muted" style="font-weight:600">30 Agu</span>
               </div>
+              <div class="report-hero">
+                <span class="rv" id="report-value">Rp 0</span>
+                <span class="rk">dari <span id="story-day-count">0</span> pesanan hari ini</span>
+              </div>
               <div class="report-figs">
                 <div class="fig">
-                  <div class="fig-k">Total</div>
-                  <div class="fig-v" id="story-day-total">Rp 0</div>
+                  <div class="fig-k">Rata-rata per pesanan</div>
+                  <div class="fig-v" id="report-avg">Rp 0</div>
                 </div>
                 <div class="fig">
-                  <div class="fig-k">Transaksi</div>
-                  <div class="fig-v" id="story-day-count">0</div>
-                </div>
-                <div class="fig">
-                  <div class="fig-k">Rata-rata</div>
-                  <div class="fig-v">Rp 25k</div>
+                  <div class="fig-k">Terkirim ke dapur</div>
+                  <div class="fig-v" id="report-sent">0</div>
                 </div>
               </div>
               <div class="bars" id="story-day-bars">
@@ -595,6 +604,7 @@
 <script src="/assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="/assets/site.js" defer></script>
 <script src="/assets/story.js" defer></script>
+<script src="/assets/proses.js" defer></script>
 <script src="/assets/motion.js" defer></script>
 </body>
 </html>

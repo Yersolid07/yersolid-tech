@@ -103,20 +103,7 @@
     }
   };
 
-  const renderSteps = () => {
-    const order = { masuk: 0, masak: 1, siap: 2, selesai: 3 };
-    const cur = order[story.stage] ?? -1;
-    document.querySelectorAll('.step-dot').forEach((dot) => {
-      const idx = order[dot.dataset.step] ?? -1;
-      dot.classList.toggle('done', idx < cur);
-      dot.classList.toggle('on', idx === cur);
-      const li = dot.closest('li');
-      if (li) {
-        li.classList.toggle('is-done', idx < cur);
-        li.classList.toggle('is-now', idx === cur);
-      }
-    });
-  };
+  // jalur tahap (.rail-step) dikelola proses.js
 
   story.on((st) => {
     if (st.stage !== 'masuk' || !kdsList) return;
@@ -125,11 +112,10 @@
   });
 
   story.on(renderKds);
-  story.on(renderSteps);
 
   /* ---------------- laporan ikut terisi ---------------- */
   const dayCount = document.getElementById('story-day-count');
-  const dayTotal = document.getElementById('story-day-total');
+
   const dayBars = document.getElementById('story-day-bars');
 
   const renderReport = () => {
@@ -139,7 +125,8 @@
     const n = baseCount + story.orders.length;
     const t = baseTotal + story.orders.reduce((a, o) => a + o.total, 0);
     dayCount.textContent = String(n);
-    dayTotal.textContent = 'Rp ' + t.toLocaleString('id-ID');
+    const rvEl = document.getElementById('report-value');
+    if (rvEl) rvEl.textContent = 'Rp ' + t.toLocaleString('id-ID');
 
     if (!dayBars) return;
     // menu terlaris = gabungan item dari pesanan story + dasar
@@ -180,7 +167,12 @@
     const n = story.orders.length;
     const tot = story.orders.reduce((a, o) => a + o.total, 0);
     document.getElementById('story-day-count').textContent = String(n);
-    document.getElementById('story-day-total').textContent = 'Rp ' + tot.toLocaleString('id-ID');
+    const rv = document.getElementById('report-value');
+    const ra = document.getElementById('report-avg');
+    const rs = document.getElementById('report-sent');
+    if (rv) rv.textContent = 'Rp 0';
+    if (ra) ra.textContent = 'Rp ' + (n ? Math.round(tot / n).toLocaleString('id-ID') : '0');
+    if (rs) rs.textContent = String(n);
     renderReport();
   });
 
@@ -204,31 +196,38 @@
   }
 
   /* ---------------- pemicu otomatis saat scroll ---------------- */
-  // Ketika pengunjung sampai ke bagian dapur, pesanan mulai "dimasak" sendiri.
+  // Pemicu dibuat SAAT pesanan masuk, bukan saat halaman dimuat: kalau dibuat
+  // lebih awal, `once` sudah terpakai sebelum ada pesanan, dan tahap tak maju.
   if (window.ScrollTrigger && !reduce) {
-    const kdsSection = document.getElementById('dapur');
-    if (kdsSection) {
-      ScrollTrigger.create({
-        trigger: kdsSection,
-        start: 'top 65%',
-        once: true,
-        onEnter: () => {
-          if (story.ticket && story.stage === 'masuk') {
-            setTimeout(() => story.advance('masak'), 700);
-          }
-        },
-      });
-    }
-    const siapSection = document.getElementById('laporan');
-    if (siapSection) {
-      ScrollTrigger.create({
-        trigger: siapSection,
-        start: 'top 70%',
-        once: true,
-        onEnter: () => {
-          if (story.ticket && story.stage === 'masak') story.advance('siap');
-        },
-      });
-    }
+    let armed = null;
+
+    story.on(() => {
+      if (armed || !story.ticket) return;
+      armed = true;
+
+      const kdsSection = document.getElementById('dapur');
+      if (kdsSection) {
+        ScrollTrigger.create({
+          trigger: kdsSection,
+          start: 'top 75%',
+          once: true,
+          onEnter: () => {
+            if (story.stage === 'masuk') setTimeout(() => story.advance('masak'), 600);
+          },
+        });
+      }
+      const reportSection = document.getElementById('laporan');
+      if (reportSection) {
+        ScrollTrigger.create({
+          trigger: reportSection,
+          start: 'top 75%',
+          once: true,
+          onEnter: () => {
+            if (story.stage === 'masak') story.advance('siap');
+          },
+        });
+      }
+      ScrollTrigger.refresh();
+    });
   }
 })();

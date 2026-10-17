@@ -51,14 +51,14 @@ const st2 = await p.evaluate(() => window.YT_STORY.stage);
 t('tombol memajukan tahap', st2 !== 'masuk', st2);
 
 // 5. titik langkah menyala
-const onDots = await p.locator('.step-dot.on').count();
+const onDots = await p.locator('.rail-step.is-now').count();
 t('titik tahap aktif', onDots === 1, String(onDots));
 
 // 6. laporan ikut bertambah
 await p.locator('#laporan').scrollIntoViewIfNeeded();
 await p.waitForTimeout(900);
 const dayCount = await p.textContent('#story-day-count');
-const dayTotal = await p.textContent('#story-day-total');
+const dayTotal = await p.textContent('#report-value');
 t('laporan bertambah transaksi', dayCount !== '0', dayCount);
 t('laporan total terisi', dayTotal !== 'Rp 0', dayTotal);
 
