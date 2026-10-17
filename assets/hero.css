@@ -1,0 +1,245 @@
+/* ============================================================
+   HERO — pola dari referensi user: satu pesan, tengah, lapang.
+   Referensi memakai:
+     .hero{padding:clamp(48px,9vw,110px) 0 56px; text-align:center}
+     h1{font-size:clamp(2.3rem,6.4vw,4.6rem); line-height:1.02;
+        letter-spacing:-.045em; max-width:15ch; margin:0 auto 20px}
+     h1 em{color:var(--acc)}
+     .act{display:flex; gap:12px; justify-content:center}
+   Hero kita sebelumnya kiri-rata dengan panel kasir besar: dua pusat
+   perhatian, tidak ada titik masuk. Sekarang satu alur baca.
+   ============================================================ */
+
+.hero {
+  padding: clamp(3rem, 7vw, 6.5rem) 0 clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.hero .hero-grid {
+  display: block;          /* bukan grid 2 kolom: hero hanya bicara satu hal */
+  text-align: center;
+}
+
+.hero-copy {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+/* Judul: besar, rapat, satu bagian berwarna. */
+.hero .display {
+  font-size: clamp(2.15rem, 5.6vw, 3.9rem);
+  line-height: 1.04;
+  letter-spacing: -0.042em;
+  font-weight: 800;
+  max-width: 17ch;
+  margin: 0 auto clamp(1.1rem, 2vw, 1.5rem);
+  text-wrap: balance;
+}
+
+.hero .display em {
+  font-style: normal;
+  color: var(--heat, #c25a1c);   /* aksen hangat, satu-satunya di hero */
+}
+
+.hero .lead {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.55;
+  max-width: 54ch;
+  margin: 0 auto clamp(1.4rem, 2.4vw, 1.9rem);
+}
+
+/* Tombol: sejajar tengah, tidak mepet. */
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(0.9rem, 1.4vw, 1.1rem);
+}
+
+.hero-note {
+  font-size: 0.9375rem;
+  color: var(--muted);
+  margin: 0 0 clamp(1.6rem, 2.6vw, 2.2rem);
+}
+
+/* Petunjuk gulir: kecil, tenang, bergerak pelan. */
+.hero-scroll {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+  opacity: 0.75;          /* penunjuk arah, bukan pengumuman */
+  margin: 0 0 clamp(1.8rem, 3vw, 2.6rem);
+  animation: hero-bob 2.4s ease-in-out infinite;
+}
+@keyframes hero-bob {
+  50% { transform: translateY(6px); }
+}
+
+/* Fakta: tiga angka sejajar, dipisah ruang, bukan kotak-kotak. */
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2vw, 2rem);
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  border-top: 1px solid rgba(16, 40, 58, 0.1);
+  padding-top: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.hero-facts > div {
+  display: flex;
+  flex-direction: column-reverse;   /* angka dulu, label di bawah */
+  gap: 2px;
+  min-width: 0;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.hero-facts dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  color: var(--muted);
+  min-height: 0;
+}
+
+.hero-facts dd b {
+  display: block;
+  font-family: var(--f-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0 0 1px;
+}
+
+.hero-facts dd span {
+  display: block;
+  font-size: 0.8125rem;
+}
+
+.hero-facts dt {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Panel kasir: turun ke bawah fakta, jadi alat bantu bukan pusat.
+   Lebarnya SAMA dengan blok teks supaya hanya ada satu grid horizontal. */
+.hero .row-media {
+  max-width: 46rem;
+  margin: clamp(1.8rem, 3.4vw, 2.8rem) auto 0;
+}
+
+/* Ujung mockup: crop di batas alami, dengan tepi bawah yang menutup
+   supaya tidak terlihat terpotong. */
+.hero .row-media .pos {
+  overflow: hidden;
+  border-radius: var(--r-ui, 14px);
+}
+
+/* ---------- HP: rapatkan, jangan jadi 1,7 layar ---------- */
+@media (max-width: 720px) {
+  .hero {
+    padding: clamp(1.5rem, 5vw, 2.25rem) 0 1.5rem;
+  }
+  .hero .display {
+    font-size: clamp(1.7rem, 7.4vw, 2.3rem);
+    max-width: 100%;
+    margin: 0 auto 0.7rem;
+    padding-inline: 0.25rem;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+  .hero .lead {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    margin-bottom: 1.1rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    min-height: 52px;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+  .hero-note {
+    font-size: 0.875rem;
+    margin-top: 0.9rem;
+    margin-bottom: 1.1rem;
+  }
+  .hero-scroll {
+    display: none;   /* di HP sudah jelas harus digulir */
+  }
+  .hero-facts {
+    gap: 0.5rem;
+    padding-top: 0.85rem;
+    margin-top: 0.9rem;
+  }
+  .hero-facts dd b {
+    font-size: 1.25rem;
+  }
+  .hero-facts dt,
+  .hero-facts dd span {
+    font-size: 0.8125rem;
+    line-height: 1.25;
+  }
+  .hero .row-media {
+    margin-top: 1.4rem;
+  }
+}
+
+/* ---------- tablet: antara, beri ruang ---------- */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .hero .display {
+    font-size: clamp(2.4rem, 5.2vw, 3.2rem);
+  }
+  .hero-copy { max-width: 40rem; }
+}
+
+/* ---------- gerak dikurangi ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll { animation: none; }
+}
+
+/* Warna di hero dibatasi: navy (teks), oranye (aksen), biru (aksi).
+   Magenta pada total memunculkan warna keempat yang tak dijelaskan. */
+.hero .pos-total .amt {
+  color: var(--ink);
+}
+
+/* ============================================================
+   GULIR HALUS — semua tautan jangkar mengalir, tidak melompat.
+   Dihormati: prefers-reduced-motion mematikannya (lihat site.css).
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+  /* sedikit lebih lambat dari default supaya terasa disengaja */
+  scroll-padding-top: 92px;
+}
+
+/* Bagian yang dituju tidak pernah mendarat di bawah nav. */
+section[id],
+main[id] {
+  scroll-margin-top: 92px;
+}
+
+/* Gulir di dalam kontainer panjang (tabel, keranjang) juga halus. */
+.kds-board,
+.pos-lines,
+.price-wrap {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Bilah gulir ramping, tidak memotong tata letak. */
+@supports (scrollbar-width: thin) {
+  html { scrollbar-width: thin; scrollbar-color: rgba(16,40,58,0.28) transparent; }
+}
