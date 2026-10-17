@@ -132,7 +132,8 @@
   font-variant-numeric: tabular-nums;
 }
 .kds-bar {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 96px;   /* dulu bisa menyusut jadi sepetak kecil, terbaca seperti bug */
   height: 6px;
   border-radius: 99px;
   background: var(--surface-2);
@@ -163,12 +164,17 @@
 .kds-serve:hover { background: #115c3f; }
 .kds-serve:active { transform: scale(0.97); }
 
-/* toast: satu pesan, tidak menutupi */
+/* toast: satu pesan, tidak menutupi.
+   Dulu di bawah (bottom:22px) dan menutupi kolom board di HP.
+   Sekarang di atas, tepat di bawah nav, jadi selalu di area kosong. */
 .kds-toast {
   position: fixed;
   left: 50%;
-  bottom: 22px;
-  transform: translate(-50%, 140%);
+  top: 84px;
+  bottom: auto;
+  /* lebar penuh: terbaca sebagai bar status, bukan gelembung melayang */
+  width: min(94vw, 460px);
+  transform: translate(-50%, -200%);
   z-index: 95;
   background: var(--ink);
   color: #fff;
@@ -181,6 +187,11 @@
   transition: transform 0.5s var(--ease-out);
 }
 .kds-toast.on { transform: translate(-50%, 0); }
+@media (min-width: 721px) {
+  /* layar lebar: kembali ke bawah, di sana tidak menutupi apa pun */
+  .kds-toast { top: auto; bottom: 22px; transform: translate(-50%, 140%); }
+  .kds-toast.on { transform: translate(-50%, 0); }
+}
 
 /* mobile: kolom bertumpuk, tetap terbaca */
 @media (max-width: 720px) {

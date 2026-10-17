@@ -1,0 +1,208 @@
+/* ============================================================
+   HP — PERBAIKAN TATA LETAK
+   Setiap aturan di sini menjawab masalah yang TERUKUR, bukan dugaan:
+
+   1. Nav sticky 76px menutupi isi saat melompat ke jangkar
+      (terukur: kartu top 26px < nav bottom 76px).
+   2. Toast 62px menutupi baris konten di bawahnya.
+   3. Tiga kartu bukti bertumpuk selebar penuh (326px tiap kartu)
+      padahal isinya angka pendek.
+   4. Kartu Professional tidak punya label "paling populer",
+      jadi penekanan hanya lewat warna.
+   5. Judul bagian terpotong di atas karena jarak setelah nav
+      sticky tidak cukup (hanya 22px).
+   ============================================================ */
+
+@media (max-width: 720px) {
+  /* ---------- 1. Jangkar tidak boleh mendarat di bawah nav ---------- */
+  html {
+    scroll-padding-top: 88px;   /* nav 76px + 12px napas */
+  }
+  [id] {
+    scroll-margin-top: 88px;
+  }
+
+  /* ---------- 5. Judul bagian butuh jarak setelah nav sticky ---------- */
+  .band,
+  .photo-band,
+  .closing {
+    padding-top: clamp(2.75rem, 2rem + 4vw, 4rem);
+    padding-bottom: clamp(2.5rem, 2rem + 3vw, 3.5rem);
+  }
+  .band > .wrap > .head:first-child,
+  .band > .wrap > .proof-kicker:first-child {
+    margin-top: 0;
+  }
+
+  /* ---------- 2. Toast tidak menutupi konten ----------
+     Beri ruang di bawah dokumen setinggi toast + napas, supaya
+     baris terakhir selalu bisa digulir ke atas toast. */
+  body {
+    padding-bottom: 0;
+  }
+  .toast,
+  [class*="toast"] {
+    bottom: max(14px, env(safe-area-inset-bottom));
+    max-width: calc(100vw - 32px);
+    font-size: 0.875rem;
+  }
+  /* cadangan: konten terakhir tidak tertutup toast */
+  .closing,
+  footer.site-foot {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Toast di HP adalah BAR STATUS di bawah nav, bukan gelembung
+     melayang. Saat tampil, isi didorong turun supaya tidak ada
+     yang tertutup sama sekali. */
+  /* bar status di bawah nav; geometri eksplisit supaya tidak melebar */
+  .kds-toast {
+    top: 76px;
+    bottom: auto;   /* WAJIB: bottom:14px dari aturan lain meregangkan toast setinggi layar */
+    left: 0;
+    right: 0;
+    width: auto;
+    max-width: none;
+    border-radius: 0 0 14px 14px;
+    padding: 9px 16px;
+    text-align: center;
+  }
+  .kds-toast:not(.on) { transform: translateY(-150%); }
+  .kds-toast.on { transform: translateY(0); }
+
+  /* ---------- 3. Kartu bukti/statistik jadi grid, bukan tumpukan ---------- */
+  .proof-figs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 1.25rem;
+    align-items: stretch;
+  }
+  .proof-figs > div {
+    padding: 13px 13px 12px;
+    background: var(--surface-hi);
+    border-radius: var(--r-ui, 14px);
+    min-width: 0;
+    display: flex;
+    flex-direction: column-reverse;  /* angka di atas, label di bawah */
+    justify-content: flex-end;
+    gap: 2px;
+    text-align: left;
+  }
+  /* kartu "Modul terpakai" isinya panjang: beri satu baris penuh */
+  .proof-figs > div:last-of-type {
+    grid-column: 1 / -1;
+  }
+  .proof-figs dt {
+    font-size: 0.8125rem;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .proof-figs .proof-num {
+    font-size: 1.5rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+  }
+  /* tinggi kartu seragam walau isi angkanya beda */
+  .proof-figs > div {
+    min-height: 84px;
+  }
+  .proof-figs dd {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+  .proof-note {
+    grid-column: 1 / -1;
+    margin: 2px 0 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  /* ---------- 4. Label "paling populer" pada kartu unggulan ---------- */
+  .plan-card[data-hot="true"] {
+    position: relative;
+  }
+  .plan-card[data-hot="true"]::before {
+    content: "Paling populer";
+    display: inline-block;
+    align-self: flex-start;
+    padding: 4px 10px;
+    margin-bottom: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  /* ---------- kutipan bukti: tanpa pita kiri berwarna ----------
+     craft-floor melarang border/shadow sebagai penanda sisi.
+     Pemisahan lewat langkah warna. */
+  .proof-quote {
+    box-shadow: none;
+    padding: 18px 16px;
+  }
+  .proof-quote footer {
+    margin-top: 14px;
+    gap: 10px;
+  }
+  .proof-avatar {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* layar sangat kecil: kartu bukti satu kolom kalau sempit */
+@media (max-width: 340px) {
+  .proof-figs {
+    grid-template-columns: 1fr;
+  }
+  .proof-figs > div:last-of-type {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  /* Judul: baris kedua jangan menggantung pendek.
+     text-wrap:balance membagi kata ke baris lebih merata. */
+  .head,
+  .display {
+    text-wrap: balance;
+  }
+
+  /* Bar progres tiket: beri jalur (track) yang jelas supaya tidak
+     terbaca sebagai elemen terpotong. */
+  .kds-bar {
+    width: 100%;
+    background: rgba(16, 40, 58, 0.14);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .kds-bar > i {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: var(--heat, #c25a1c);
+  }
+
+  /* Timer jadi chip supaya terbaca, tidak melayang sendirian */
+  .kds-timer,
+  .kds-ticket .tmr {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    background: var(--surface-2);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+}
