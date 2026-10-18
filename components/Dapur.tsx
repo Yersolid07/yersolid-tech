@@ -27,7 +27,7 @@ function Kartu({ p, progres }: { p: Pesanan; progres?: number }) {
       {progres !== undefined && (
         <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-line" role="progressbar" aria-valuenow={Math.round(progres)} aria-valuemin={0} aria-valuemax={100} aria-label={`Memasak pesanan ${p.no}`}>
           <i
-            className="block h-full rounded-full bg-acc transition-[width] duration-200 ease-linear"
+            className="bar-jalan block h-full rounded-full bg-acc transition-[width] duration-200 ease-linear"
             style={{ width: `${progres}%` }}
           />
         </div>
@@ -69,7 +69,7 @@ export function Dapur() {
   const kosong = state.pesanan.filter((p) => p.tahap !== 'lunas').length === 0;
 
   return (
-    <section id="dapur" className="scroll-mt-24 bg-bg py-14 sm:py-20">
+    <section id="dapur" className=" bg-bg py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <h2 className="masuk max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Tiketnya sudah masuk dapur.

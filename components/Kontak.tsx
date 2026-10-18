@@ -51,7 +51,7 @@ export function Kontak() {
     'min-h-[48px] w-full rounded-[14px] bg-bg px-4 text-[1rem] text-ink placeholder:text-muted focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-blue';
 
   return (
-    <section id="kontak" className="scroll-mt-24 bg-surface-2 py-14 sm:py-20">
+    <section id="kontak" className=" bg-surface-2 py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
           <div>

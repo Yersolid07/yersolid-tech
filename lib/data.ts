@@ -37,6 +37,7 @@ export const PAKET = [
     label: '150rb',
     populer: false,
     outlet: '1 outlet',
+    perOutlet: 'Rp 150rb / outlet',
   },
   {
     nama: 'Professional',
@@ -44,6 +45,7 @@ export const PAKET = [
     label: '300rb',
     populer: true,
     outlet: '3 outlet',
+    perOutlet: 'Rp 100rb / outlet',
   },
   {
     nama: 'Enterprise',
@@ -51,6 +53,7 @@ export const PAKET = [
     label: '500rb',
     populer: false,
     outlet: 'Outlet tanpa batas',
+    perOutlet: 'Kontak kami',
   },
 ];
 

@@ -69,7 +69,7 @@ export function Kasir() {
   const jumlah = itemKeranjang.reduce((a, [, q]) => a + q, 0);
 
   return (
-    <section id="kasir" className="scroll-mt-24 bg-surface-2 py-14 sm:py-20">
+    <section id="kasir" className=" bg-surface-2 py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <h2 className="masuk max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Pesanan Anda, sampai ke dapur.
@@ -96,7 +96,7 @@ export function Kasir() {
                     disabled={habis}
                     aria-label={`Tambah ${m.nama}, sisa ${sisa} porsi`}
                     className={[
-                      'relative flex flex-col gap-1 rounded-[16px] p-3 text-left transition-all duration-150',
+                      'kartu-menu relative flex flex-col gap-1 rounded-[16px] p-3 text-left',
                       'min-h-[44px]',
                       habis
                         ? 'cursor-not-allowed bg-surface-2 opacity-50'

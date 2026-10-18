@@ -32,7 +32,7 @@ export function Hero() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href="#kasir"
-              className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-acc px-8 font-bold text-white transition-[transform,background-color] duration-200 hover:bg-acc-deep active:scale-[0.98]"
+              className="tombol-utama inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full bg-acc px-8 font-bold text-white hover:bg-acc-deep"
             >
               Mulai dari kasir
               <span aria-hidden="true">↓</span>

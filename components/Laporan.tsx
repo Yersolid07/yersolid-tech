@@ -34,7 +34,7 @@ export function Laporan() {
   }
 
   return (
-    <section id="laporan" className="scroll-mt-24 bg-bg py-14 sm:py-20">
+    <section id="laporan" className=" bg-bg py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <h2 className="masuk max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Tutup buku selesai sebelum pulang.

@@ -8,7 +8,7 @@ import { PAKET, FITUR } from '@/lib/data';
 
 export function Harga() {
   return (
-    <section id="harga" className="scroll-mt-24 bg-surface-2 py-14 sm:py-20">
+    <section id="harga" className=" bg-surface-2 py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <h2 className="masuk text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">Harga terbuka, tanpa nego.</h2>
         <p className="mt-3 max-w-[46ch] text-muted">
@@ -39,6 +39,9 @@ export function Harga() {
                 </span>
               </p>
               <p className="m-0 mt-3 text-[0.9375rem] font-semibold">{p.outlet}</p>
+              <p className={["m-0 mt-1 text-[0.8125rem]", p.populer ? "text-bg/65" : "text-muted"].join(' ')}>
+                {p.perOutlet} · belum termasuk PPN 11%
+              </p>
               <a
                 href={`mailto:halo@yersolid.web.id?subject=Paket%20${encodeURIComponent(p.nama)}`}
                 className={[
@@ -63,7 +66,7 @@ export function Harga() {
               <p className="m-0 mt-1 flex gap-3 text-[0.8125rem] text-muted">
                 {PAKET.map((p, i) => (
                   <span key={p.nama} className={f.paket[i] ? 'text-ok' : ''}>
-                    {f.paket[i] ? '✓' : '—'} {p.nama}
+                    {f.paket[i] ? '✓' : '—'} {['Starter', 'Profesional', 'Enterprise'][i]}
                   </span>
                 ))}
               </p>
@@ -101,6 +104,26 @@ export function Harga() {
             </tbody>
           </table>
         </div>
+        {/* Rincian harga: pertanyaan yang pasti muncul ("kenapa 3 outlet
+            lebih murah per outlet?"). Dijawab sebelum ditanya. */}
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {[
+            { j: 'Hemat tahunan', i: 'Bayar 10 bulan, dapat 12 — hemat Rp 300rb di Starter.' },
+            { j: 'Tanpa biaya pasang', i: 'Menu Anda kami masukkan. Tidak ada biaya awal.' },
+            { j: 'Berhenti kapan saja', i: 'Tanpa kontrak. Data tetap bisa diekspor.' },
+          ].map((x) => (
+            <div key={x.j} className="rounded-[16px] bg-surface p-4">
+              <p className="m-0 text-[0.9375rem] font-bold">{x.j}</p>
+              <p className="m-0 mt-1 text-[0.875rem] leading-snug text-muted">{x.i}</p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-[0.8125rem] text-muted">
+          Harga per outlet per bulan. Paket Professional lebih murah per outlet
+          karena dirancang untuk 3 outlet sekaligus. Contoh setelah PPN:
+          Starter Rp 166.500, Professional Rp 333.000 per bulan.
+        </p>
       </div>
     </section>
   );
@@ -108,7 +131,7 @@ export function Harga() {
 
 export function Bukti() {
   return (
-    <section id="bukti" className="scroll-mt-24 bg-bg py-14 sm:py-20">
+    <section id="bukti" className=" bg-bg py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <h2 className="masuk max-w-[26ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Sudah dipakai, salah satunya Wawi Kadio.

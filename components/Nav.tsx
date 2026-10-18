@@ -35,7 +35,7 @@ export function Nav() {
             <a
               key={t.href}
               href={t.href}
-              className="flex min-h-[44px] items-center rounded-full px-3 text-[0.9375rem] font-semibold text-muted no-underline transition-colors hover:bg-surface-2 hover:text-ink"
+              className="nav-tautan flex min-h-[44px] items-center rounded-full px-3 text-[0.9375rem] font-semibold text-muted no-underline transition-colors hover:text-ink"
             >
               {t.label}
             </a>

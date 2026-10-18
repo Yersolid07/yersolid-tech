@@ -32,6 +32,10 @@
 }
 
 html {
+  /* Satu mekanisme saja: scroll-padding-top di sini cukup. Memberi
+     scroll-mt di tiap section juga membuat keduanya BERTUMPUK sehingga
+     judul berhenti terlalu jauh di bawah nav. */
+  scroll-padding-top: 84px;
   scroll-behavior: smooth;
   scroll-padding-top: 84px;
   -webkit-text-size-adjust: 100%;
@@ -188,4 +192,116 @@ button {
 }
 .sorot {
   animation: sorot-angka 900ms ease-out;
+}
+
+/* ============================================================
+   SISTEM GERAK — satu bahasa untuk seluruh halaman.
+
+   Aturan yang tidak boleh dilanggar:
+   - Gerak hanya memindahkan dan men-skala. TIDAK PERNAH menyembunyikan
+     isi lewat opacity, karena pernah membuat seluruh halaman kosong
+     di HP lambat.
+   - Semua tunduk pada prefers-reduced-motion.
+   - Durasi konsisten: 220ms untuk sentuhan, 420ms untuk masuk.
+   ============================================================ */
+
+:root {
+  --gerak-cepat: 220ms;
+  --gerak-masuk: 420ms;
+  --gerak-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- 1. Tautan nav: garis bawah tumbuh dari tengah --- */
+.nav-tautan {
+  position: relative;
+}
+.nav-tautan::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-acc);
+  transition: left var(--gerak-cepat) var(--gerak-ease),
+              right var(--gerak-cepat) var(--gerak-ease);
+}
+.nav-tautan:hover::after,
+.nav-tautan:focus-visible::after {
+  left: 12px;
+  right: 12px;
+}
+
+/* --- 2. Kartu menu kasir: terangkat dan cincin aksen --- */
+.kartu-menu {
+  transition: transform var(--gerak-cepat) var(--gerak-ease),
+              box-shadow var(--gerak-cepat) var(--gerak-ease);
+}
+.kartu-menu:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(28, 26, 23, 0.06), 0 18px 34px -20px rgba(28, 26, 23, 0.5);
+}
+.kartu-menu:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* --- 3. Tombol utama: isapan cahaya saat ditekan --- */
+.tombol-utama {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--gerak-cepat) var(--gerak-ease),
+              background-color var(--gerak-cepat) ease;
+}
+.tombol-utama:active {
+  transform: scale(0.975);
+}
+
+/* --- 4. Tiket dapur: masuk dari samping --- */
+@keyframes tiket-masuk {
+  from { transform: translateX(-14px) scale(0.985); }
+  to   { transform: translateX(0) scale(1); }
+}
+.animate-tiket {
+  animation: tiket-masuk var(--gerak-masuk) var(--gerak-ease) both;
+}
+
+/* --- 5. Bar progres: denyut halus saat berjalan --- */
+@keyframes progres-gerak {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.18); }
+}
+.bar-jalan {
+  animation: progres-gerak 1.4s ease-in-out infinite;
+}
+
+/* --- 6. Angka laporan: naik sedikit saat berubah --- */
+@keyframes angka-naik {
+  from { transform: translateY(6px); }
+  to   { transform: translateY(0); }
+}
+.sorot {
+  animation: sorot-angka 900ms ease-out, angka-naik var(--gerak-masuk) var(--gerak-ease);
+}
+
+/* --- 7. Sorotan baris menu saat stok berkurang --- */
+@keyframes baris-berubah {
+  0%   { background-color: transparent; }
+  30%  { background-color: color-mix(in srgb, var(--color-ok) 14%, transparent); }
+  100% { background-color: transparent; }
+}
+.berubah {
+  animation: baris-berubah 1200ms ease-out;
+}
+
+/* --- 8. Semua tunduk pada permintaan kurangi gerak --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
 }
