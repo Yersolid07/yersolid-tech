@@ -1,4 +1,4 @@
-import { PAKET, rupiah } from '@/lib/data';
+import { PAKET, FITUR } from '@/lib/data';
 
 /* ============================================================
    HARGA + BUKTI + PENUTUP
@@ -10,7 +10,7 @@ export function Harga() {
   return (
     <section id="harga" className="scroll-mt-24 bg-surface-2 py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
-        <h2 className="text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">Harga terbuka, tanpa nego.</h2>
+        <h2 className="masuk text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">Harga terbuka, tanpa nego.</h2>
         <p className="mt-3 max-w-[46ch] text-muted">
           Bayar bulanan, berhenti kapan saja. Harga per outlet, belum termasuk pajak.
         </p>
@@ -38,20 +38,7 @@ export function Harga() {
                   /bulan
                 </span>
               </p>
-              <ul className="m-0 mt-4 grid flex-1 list-none gap-2 p-0">
-                {p.fitur.map((f) => (
-                  <li
-                    key={f}
-                    className={[
-                      'flex items-start gap-2 text-[0.9375rem]',
-                      p.populer ? 'text-bg/85' : 'text-muted',
-                    ].join(' ')}
-                  >
-                    <span className="mt-0.5 text-ok" aria-hidden="true">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+              <p className="m-0 mt-3 text-[0.9375rem] font-semibold">{p.outlet}</p>
               <a
                 href={`mailto:halo@yersolid.web.id?subject=Paket%20${encodeURIComponent(p.nama)}`}
                 className={[
@@ -64,6 +51,56 @@ export function Harga() {
             </div>
           ))}
         </div>
+
+        {/* Tabel perbandingan: satu sumber kebenaran, semua paket sejajar.
+            Di HP tabel digulir mendatar, bukan dipecah jadi 3 daftar. */}
+        {/* HP: daftar per paket supaya kolom tidak berdesakan.
+            Tablet ke atas: tabel perbandingan penuh. */}
+        <ul className="m-0 mt-8 grid list-none gap-2 p-0 sm:hidden">
+          {FITUR.map((f) => (
+            <li key={f.nama} className="rounded-[14px] bg-surface p-3">
+              <p className="m-0 text-[0.9375rem] font-semibold">{f.nama}</p>
+              <p className="m-0 mt-1 flex gap-3 text-[0.8125rem] text-muted">
+                {PAKET.map((p, i) => (
+                  <span key={p.nama} className={f.paket[i] ? 'text-ok' : ''}>
+                    {f.paket[i] ? '✓' : '—'} {p.nama}
+                  </span>
+                ))}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-8 hidden rounded-[20px] bg-surface p-4 sm:block sm:overflow-x-auto sm:p-0">
+          <table className="w-full border-collapse text-left sm:min-w-[480px]">
+            <thead>
+              <tr>
+                <th scope="col" className="p-2 text-[0.875rem] font-semibold text-muted sm:p-4">Fitur</th>
+                {PAKET.map((p) => (
+                  <th key={p.nama} scope="col" className="p-2 text-center text-[0.875rem] font-bold sm:p-4">
+                    {p.nama}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {FITUR.map((f) => (
+                <tr key={f.nama} className="border-t border-[var(--line)]">
+                  <th scope="row" className="p-2 text-[0.9375rem] font-normal leading-snug break-words sm:p-4">{f.nama}</th>
+                  {f.paket.map((ada, i) => (
+                    <td key={i} className="p-2 text-center sm:p-4">
+                      {ada ? (
+                        <span className="text-ok" aria-label="termasuk">✓</span>
+                      ) : (
+                        <span className="text-[var(--line)]" aria-label="tidak termasuk">—</span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );
@@ -73,7 +110,7 @@ export function Bukti() {
   return (
     <section id="bukti" className="scroll-mt-24 bg-bg py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
-        <h2 className="max-w-[26ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
+        <h2 className="masuk max-w-[26ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Sudah dipakai, salah satunya Wawi Kadio.
         </h2>
         <p className="mt-3 max-w-[52ch] text-muted">

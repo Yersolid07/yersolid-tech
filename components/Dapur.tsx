@@ -71,7 +71,7 @@ export function Dapur() {
   return (
     <section id="dapur" className="scroll-mt-24 bg-bg py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
-        <h2 className="max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
+        <h2 className="masuk max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Tiketnya sudah masuk dapur.
         </h2>
         <p className="mt-3 max-w-[52ch] text-muted">
@@ -80,18 +80,27 @@ export function Dapur() {
         </p>
 
         {kosong && (
-          <div className="mt-7 rounded-[20px] bg-surface p-6 text-center">
-            <p className="font-bold">Belum ada pesanan di dapur.</p>
-            <p className="mt-1 text-[0.9375rem] text-muted">
-              Kirim dari kasir di atas, atau pakai contoh.
+          <div className="mt-7 rounded-[20px] bg-surface p-5 sm:p-6">
+            <p className="text-[1.0625rem] font-bold">Belum ada pesanan di dapur.</p>
+            <p className="mt-1.5 text-[0.9375rem] text-muted">
+              Ketuk menu di kasir, atau muat satu contoh untuk melihat alurnya.
             </p>
-            <button
-              type="button"
-              onClick={() => kirim({ t: 'contoh' })}
-              className="mt-4 min-h-[48px] rounded-full bg-ink px-6 font-bold text-white transition-colors hover:bg-[#33302b]"
-            >
-              Pakai contoh pesanan
-            </button>
+            <div className="mt-4 flex flex-wrap gap-2.5">
+              <button
+                type="button"
+                onClick={() => kirim({ t: 'contoh' })}
+                className="flex min-h-[50px] items-center rounded-full bg-acc px-6 font-bold text-white transition-transform active:scale-[0.98]"
+              >
+                Pakai contoh pesanan
+              </button>
+              {/* jalan keluar: sebelumnya teks "kasir di atas" tanpa tautan = dead end */}
+              <a
+                href="#kasir"
+                className="flex min-h-[50px] items-center rounded-full bg-surface-2 px-6 font-bold text-ink no-underline transition-colors hover:bg-bg"
+              >
+                Buka kasir
+              </a>
+            </div>
           </div>
         )}
 

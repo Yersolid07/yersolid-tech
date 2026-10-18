@@ -55,7 +55,7 @@ export function Kontak() {
       <div className="mx-auto w-full max-w-[1120px] px-5">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <h2 className="max-w-[22ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
+            <h2 className="masuk max-w-[22ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
               Minta akses coba.
             </h2>
             <p className="mt-3 max-w-[42ch] text-muted">

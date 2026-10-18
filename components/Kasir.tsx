@@ -71,7 +71,7 @@ export function Kasir() {
   return (
     <section id="kasir" className="scroll-mt-24 bg-surface-2 py-14 sm:py-20">
       <div className="mx-auto w-full max-w-[1120px] px-5">
-        <h2 className="max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
+        <h2 className="masuk max-w-[24ch] text-[clamp(1.6rem,3.8vw,2.5rem)] font-extrabold">
           Pesanan Anda, sampai ke dapur.
         </h2>
         <p className="mt-3 max-w-[52ch] text-muted">

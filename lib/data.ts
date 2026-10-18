@@ -18,27 +18,39 @@ export const MENU: Menu[] = [
   { id: 'jus', nama: 'Jus Alpukat', harga: 15000, stok: 6, ikon: 'jus' },
 ];
 
+// Fitur sejajar: setiap paket menyebut fitur yang SAMA, dibedakan ada/tidak.
+// Sebelumnya paket mahal tidak menyebut "kasir & layar dapur" sehingga
+// pembaca mengira fitur itu hilang di paket atas.
+export const FITUR: { nama: string; paket: [boolean, boolean, boolean] }[] = [
+  { nama: 'Kasir & layar dapur', paket: [true, true, true] },
+  { nama: 'Stok & laporan harian', paket: [true, true, true] },
+  { nama: 'Peringatan stok menipis', paket: [false, true, true] },
+  { nama: 'Laporan mingguan & ekspor', paket: [false, true, true] },
+  { nama: 'Akses API', paket: [false, false, true] },
+  { nama: 'Dukungan prioritas 24/7', paket: [false, false, true] },
+];
+
 export const PAKET = [
   {
     nama: 'Starter',
     harga: 150000,
     label: '150rb',
     populer: false,
-    fitur: ['1 outlet', 'Kasir & layar dapur', 'Stok & laporan harian'],
+    outlet: '1 outlet',
   },
   {
     nama: 'Professional',
     harga: 300000,
     label: '300rb',
     populer: true,
-    fitur: ['3 outlet', 'Peringatan stok menipis', 'Laporan mingguan'],
+    outlet: '3 outlet',
   },
   {
     nama: 'Enterprise',
     harga: 500000,
     label: '500rb',
     populer: false,
-    fitur: ['Outlet tanpa batas', 'Akses API & ekspor', 'Dukungan 24/7'],
+    outlet: 'Outlet tanpa batas',
   },
 ];
 

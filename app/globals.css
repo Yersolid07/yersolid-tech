@@ -58,10 +58,14 @@ p { margin: 0; }
 
 button {
   font: inherit;
-  color: inherit;
   cursor: pointer;
   border: 0;
-  background: none;
+  /* 'color: inherit' TIDAK dipakai: aturan tak berlayer mengalahkan
+     utilitas Tailwind (text-white/text-bg), sehingga teks tombol gelap
+     menyatu dengan latarnya. Bawaan tombol sudah mewarisi warna. */
+  /* Latar TIDAK direset di sini: aturan tak berlayer mengalahkan utilitas
+     Tailwind, sehingga bg-acc pada tombol jadi transparan. Tombol tanpa
+     kelas latar sudah transparan secara bawaan. */
 }
 
 :focus-visible {
@@ -155,4 +159,33 @@ button {
   .hero-title {
     font-size: clamp(1.85rem, 8vw, 2.4rem);
   }
+}
+
+/* ============================================================
+   MOTION — masuk lembut saat bagian terlihat.
+   Aturan keras: animasi hanya mengubah POSISI dan SKALA, tidak pernah
+   opacity. Kalau JS lambat atau CSS tidak dimuat, isi tetap terbaca.
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .masuk {
+      animation: masuk-lembut linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+  }
+}
+
+@keyframes masuk-lembut {
+  from { transform: translateY(18px); }
+  to   { transform: translateY(0); }
+}
+
+/* Sorot angka yang baru berubah, tanpa menggeser tata letak. */
+@keyframes sorot-angka {
+  0%, 100% { color: inherit; }
+  35%      { color: var(--ok); }
+}
+.sorot {
+  animation: sorot-angka 900ms ease-out;
 }
