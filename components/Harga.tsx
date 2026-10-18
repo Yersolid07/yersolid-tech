@@ -15,7 +15,28 @@ export function Harga() {
           Bayar bulanan, berhenti kapan saja. Harga per outlet, belum termasuk pajak.
         </p>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {/* Berlaku untuk SEMUA paket. Dulu diletakkan di dasar bagian dengan
+            bentuk kartu yang sama seperti daftar fitur, sehingga di HP
+            terbaca seolah bagian dari Enterprise. Sekarang di atas kartu
+            harga, dengan satu baris pengantar yang menyebut "semua paket". */}
+        <div className="mt-6 rounded-[16px] border border-[var(--line)] bg-surface p-4">
+          <p className="m-0 text-[0.8125rem] font-bold uppercase tracking-[0.06em] text-acc">
+            Berlaku untuk semua paket
+          </p>
+          <ul className="m-0 mt-2 grid list-none gap-1.5 p-0 sm:grid-cols-3 sm:gap-3">
+            <li className="text-[0.875rem] leading-snug text-muted">
+              <b className="text-ink">Hemat tahunan</b> — bayar 10 bulan, dapat 12 (hemat Rp 300rb di Starter)
+            </li>
+            <li className="text-[0.875rem] leading-snug text-muted">
+              <b className="text-ink">Tanpa biaya pasang</b> — menu dimasukkan, tidak ada biaya awal
+            </li>
+            <li className="text-[0.875rem] leading-snug text-muted">
+              <b className="text-ink">Berhenti kapan saja</b> — tanpa kontrak, data bisa diekspor
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
           {PAKET.map((p) => (
             <div
               key={p.nama}
@@ -104,21 +125,6 @@ export function Harga() {
             </tbody>
           </table>
         </div>
-        {/* Rincian harga: pertanyaan yang pasti muncul ("kenapa 3 outlet
-            lebih murah per outlet?"). Dijawab sebelum ditanya. */}
-        <div className="mt-4 grid gap-3 sm:grid-cols-3">
-          {[
-            { j: 'Hemat tahunan', i: 'Bayar 10 bulan, dapat 12 — hemat Rp 300rb di Starter.' },
-            { j: 'Tanpa biaya pasang', i: 'Menu Anda kami masukkan. Tidak ada biaya awal.' },
-            { j: 'Berhenti kapan saja', i: 'Tanpa kontrak. Data tetap bisa diekspor.' },
-          ].map((x) => (
-            <div key={x.j} className="rounded-[16px] bg-surface p-4">
-              <p className="m-0 text-[0.9375rem] font-bold">{x.j}</p>
-              <p className="m-0 mt-1 text-[0.875rem] leading-snug text-muted">{x.i}</p>
-            </div>
-          ))}
-        </div>
-
         <p className="mt-4 text-[0.8125rem] text-muted">
           Harga per outlet per bulan. Paket Professional lebih murah per outlet
           karena dirancang untuk 3 outlet sekaligus. Contoh setelah PPN:
