@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TOKEN — diambil dari landing lama yang sudah lolos gate.
+   Palet hangat, satu bidang warna per bagian, tanpa gradasi dekoratif.
+   ============================================================ */
+@theme {
+  --color-bg: #f7f2ea;
+  --color-surface: #fffdf9;
+  --color-surface-2: #f1eade;
+  --color-ink: #1c1a17;
+  --color-muted: #6b655b;
+  --color-line: #e6dfd2;
+  --color-acc: #e8501f;
+  --color-acc-deep: #c43c10;
+  --color-ok: #1f8a5b;
+  --color-warn: #d98a00;
+  --color-blue: #0f5ea8;
+
+  --radius-ui: 16px;
+  --radius-card: 20px;
+
+  --font-sans: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* ============================================================
+   DASAR
+   Semua teks >= 13px. Fokus terlihat. Tidak ada garis dekoratif.
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+p { margin: 0; }
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Hormati preferensi gerak. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   HERO — penuh satu layar, judul mendominasi.
+   svh dipakai supaya tidak terpotong saat bilah alamat browser muncul.
+   ============================================================ */
+.hero {
+  /* Nav sticky mengambil ~68px di atas. Tanpa dikurangi, hero + nav
+     melebihi satu layar dan fakta terdorong keluar. */
+  min-height: 100vh;
+  min-height: calc(100svh - 68px);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 4vw, 3.5rem) 0 0;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  /* .hero adalah flex; beri flex:1 supaya mengisi sisa tinggi layar */
+  flex: 1 1 auto;
+  min-height: 0;
+  justify-content: space-between;
+}
+
+.hero-title {
+  font-size: clamp(2.35rem, 6.6vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+  max-width: 16ch;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--color-acc);
+}
+
+/* ============================================================
+   AKSEN GERAK — hanya menjelaskan perubahan keadaan.
+   ============================================================ */
+@keyframes naik-halus {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes denyut {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@keyframes ketik-tiket {
+  0%   { opacity: 0; transform: translateY(-18px) rotate(-2deg) scale(0.94); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes naik-progres {
+  from { width: 0; }
+}
+
+.animate-muncul {
+  animation: naik-halus 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-tiket {
+  animation: ketik-tiket 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+/* Layar sangat pendek (320x568): isi tidak mungkin muat satu layar tanpa
+   memotong teks. Lebih baik hero tumbuh daripada teks terpotong. */
+@media (max-height: 620px) {
+  .hero {
+    min-height: calc(100svh - 68px);
+  }
+  .hero-title {
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+  }
+}
