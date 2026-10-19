@@ -9,8 +9,19 @@ import { Laporan } from '@/components/Laporan';
 import { Harga, Bukti, Penutup } from '@/components/Harga';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://saas.yersolid.web.id'),
+  /* metadataBase menentukan domain absolut untuk og:image dan canonical.
+     Sebelumnya menunjuk saas.yersolid.web.id (domain lama) sehingga
+     pratinjau WhatsApp mengambil gambar dari domain yang salah.
+     Nanti saat pindah domain, cukup ubah SATU nilai ini. */
+  metadataBase: new URL(process.env.SITE_URL ?? 'https://coba.yersolid.web.id'),
   icons: { icon: '/favicon.svg' },
+  openGraph: {
+    type: 'website',
+    locale: 'id_ID',
+    url: '/',
+    siteName: 'Yersolid Tech',
+  },
+  twitter: { card: 'summary_large_image' },
   title: 'Yersolid Tech — kasir, dapur, dan laporan dalam satu alur',
   description:
     'Ketuk menu di kasir, tiket muncul di dapur, stok berkurang, laporan terisi sendiri. Mulai Rp 150.000/bulan.',
